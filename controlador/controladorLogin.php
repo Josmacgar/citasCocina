@@ -22,8 +22,8 @@ include("../modelo/modeloUsuarios.php");
           echo "<script type=\"text/javascript\">window.location.href = \"../index.php\";</script>";
         } else {
           $errorPassword = true;
-          // header("Location:../vista/login.php");
-          echo "<script type=\"text/javascript\">window.location.href = \"../vista/login.php\";</script>";
+          header("Location:../vista/login.php?email=$email");
+          // echo "<script type=\"text/javascript\">window.location.href = \"../vista/login.php\";</script>";
         }
       } else {
         $usuarioNoregistrado = true;
