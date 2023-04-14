@@ -3,8 +3,8 @@ use Doctrine\ORM\Mapping as ORM;
 require(dirname(__FILE__, 2) . '/Repository/UsuarioRepository.php');
 
 /**
-    @ORM\MappedSuperclass
- */
+    @ORM\Entity(repositoryClass="UsuarioRepository")
+*/
 class Usuario {
     /**
         @ORM\Id
@@ -31,6 +31,10 @@ class Usuario {
     */
     private $email;
     /**
+        @ORM\Column(type="string")
+    */
+    private $contraseña;
+    /**
         @ORM\Column(type="integer")
     */
     private $telefono;
@@ -38,7 +42,10 @@ class Usuario {
         @ORM\Column(type="integer")
     */
     private $baneado;
-
+    /**
+        @ORM\Column(type="string")
+    */
+    private $rol;
 
     function __construct(){
     }
@@ -182,6 +189,44 @@ class Usuario {
 
         return $this;
     }
+    /**
+     * Get the value of rol
+     */ 
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
+     * Set the value of rol
+     *
+     * @return  self
+     */ 
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+
+        return $this;
+    }
+    /**
+     * Get the value of contraseña
+     */ 
+    public function getContraseña()
+    {
+        return $this->contraseña;
+    }
+
+    /**
+     * Set the value of contraseña
+     *
+     * @return  self
+     */ 
+    public function setContraseña($contraseña)
+    {
+        $this->contraseña = $contraseña;
+
+        return $this;
+    }
 
     public function __toString() {
         return "Usuarios: " . $this->getDni() . " - "
@@ -189,8 +234,10 @@ class Usuario {
             . $this->getApellidos(). " - "
             . $this->getFecha_nac()->format('Y-m-d H:i:s') . " - "
             . $this->getEmail() . " - "
+            . $this->getContraseña() . " - "
             . $this->getTelefono() . " - "
-            . $this->getBaneado() . " - ";
+            . $this->getBaneado() . " - "
+            . $this->getRol() . " - ";
     }
 
 }

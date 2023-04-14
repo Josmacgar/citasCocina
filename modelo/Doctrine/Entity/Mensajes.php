@@ -28,15 +28,10 @@ class Mensajes {
     */
     private $destinatario;
     /**
-        @ORM\ManyToOne(targetEntity="Profesor")
-        @ORM\JoinColumn(name="profesor",referencedColumnName="dni")
+        @ORM\ManyToOne(targetEntity="Usuario")
+        @ORM\JoinColumn(name="usuario",referencedColumnName="dni")
     */
-    private $profesor;
-    /**
-        @ORM\ManyToOne(targetEntity="Cliente")
-        @ORM\JoinColumn(name="cliente",referencedColumnName="dni")
-    */
-    private $cliente;
+    private $usuario;
     
     function __construct(){
     }
@@ -120,46 +115,6 @@ class Mensajes {
 
         return $this;
     }
-
-    /**
-     * Get the value of profesor
-     */ 
-    public function getProfesor()
-    {
-        return $this->profesor;
-    }
-
-    /**
-     * Set the value of profesor
-     *
-     * @return  self
-     */ 
-    public function setProfesor($profesor)
-    {
-        $this->profesor = $profesor;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of cliente
-     */ 
-    public function getCliente()
-    {
-        return $this->cliente;
-    }
-
-    /**
-     * Set the value of cliente
-     *
-     * @return  self
-     */ 
-    public function setCliente($cliente)
-    {
-        $this->cliente = $cliente;
-
-        return $this;
-    }
     /**
      * Get the value of idMensaje
      */ 
@@ -179,16 +134,33 @@ class Mensajes {
 
         return $this;
     }
+    /**
+     * Get the value of usuario
+     */ 
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set the value of usuario
+     *
+     * @return  self
+     */ 
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
 
     public function __toString() {
         return "Mensaje: " . $this->getFecha() . " - "
             . $this->getAsunto() . " - "
             . $this->getCuerpo(). " - "
             . $this->getDestinatario() . " - "
-            . $this->getProfesor() . " - "
-            . $this->getCliente() . " - ";
+            . $this->getUsuario() . " - ";
     }
-
 
 }
 

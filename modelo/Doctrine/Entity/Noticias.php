@@ -28,10 +28,10 @@ class Noticias {
     private $fecha;
 
     /**
-        @ORM\ManyToOne(targetEntity="Profesor")
-        @ORM\JoinColumn(name="profesor",referencedColumnName="dni")
+        @ORM\ManyToOne(targetEntity="usuario")
+        @ORM\JoinColumn(name="usuario",referencedColumnName="dni")
     */
-    private $profesor;
+    private $usuario;
 
     function __construct(){
     }
@@ -101,9 +101,9 @@ class Noticias {
     /**
      * Get the value of profesor
      */ 
-    public function getProfesor()
+    public function getusuario()
     {
-        return $this->profesor;
+        return $this->usuario;
     }
 
     /**
@@ -111,9 +111,9 @@ class Noticias {
      *
      * @return  self
      */ 
-    public function setProfesor($profesor)
+    public function setUsuario($profesor)
     {
-        $this->profesor = $profesor;
+        $this->usuario = $profesor;
 
         return $this;
     }
@@ -122,7 +122,7 @@ class Noticias {
         return "Noticias: " . $this->getTitulo() . " - "
             . $this->getCuerpo() . " - "
             . $this->getFecha(). " - "
-            . $this->getProfesor(). " - ";
+            . $this->getusuario(). " - ";
     }
 }
 
