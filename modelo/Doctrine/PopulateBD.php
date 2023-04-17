@@ -2,7 +2,6 @@
 use Doctrine\Common\Collections\ArrayCollection;
 require_once dirname(__FILE__, 1) . "/bootstrap.php";
 require_once dirname(__FILE__, 1) . "/Entity/Usuario.php";
-require_once dirname(__FILE__, 1) . "/Entity/Profesor.php";
 
 
 // $profesor = new Profesor();

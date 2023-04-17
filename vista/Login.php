@@ -54,7 +54,7 @@ print_r($_SESSION);
             </label>
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
-          <label class="mt-3 mb-3 text-muted">¿No tienes cuenta? <a href="registroUsuario.php">Crear cuenta</a></label>
+          <label class="mt-3 mb-3 text-muted">¿No tienes cuenta? <a href="/citascocina/vista/registroUsuario.php">Crear cuenta</a></label>
         </form>
                
           <p id="error">
