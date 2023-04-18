@@ -9,23 +9,26 @@ include("../modelo/Doctrine/Entity/Usuario.php");
 // C:\xampp\htdocs\citasCocina\modelo\Doctrine\PopulateBD.php
 $findUsuario=true;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $dni=$_POST['dni'];
     $nombre=$_POST['nombre'];
+    $apellidos=$_POST['apellidos'];
     $email=$_POST['email'];
     $password=$_POST['password'];
+    $telefono=$_POST['telefono'];
     $fecha=$_POST['fecha'];
 
     if(!encontrarUsuario($email)){
         $cifrarpassword= hash("sha256",$password);
         // crearUsuario($nombre,$email,$cifrarpassword);
       $usuario = new Usuario();
-      $usuario->setDni('1111');
+      $usuario->setDni($dni);
       $usuario->setNombre($nombre);
-      $usuario->setApellidos('ulises');
+      $usuario->setApellidos($apellidos);
       $date = new DateTime($fecha);
       $usuario->setFecha_nac($date);
       $usuario->setEmail($email);
       $usuario->setContraseña($cifrarpassword);
-      $usuario->setTelefono(609044332);
+      $usuario->setTelefono($telefono);
       $usuario->setBaneado(0);
       $usuario->setRol('cliente');
       $entityManager->persist($usuario);

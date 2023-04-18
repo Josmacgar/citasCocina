@@ -9,6 +9,7 @@ class Noticias {
     /**
         @ORM\Id
         @ORM\Column(type="integer")
+        @ORM\GeneratedValue
     */
     private $idNoticia;
     

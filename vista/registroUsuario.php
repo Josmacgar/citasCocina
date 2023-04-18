@@ -64,11 +64,11 @@ include("../controlador/controladorRegistroUsuario.php");
       <section id="errorContraseña" class="d-none">Formato de contraseña incorrecto</section>
       <div class="form-floating">
         <input type="tel" class="form-control" id="telefono" placeholder="625477552" name="telefono">
-        <label for="telefono">Apellidos</label>
+        <label for="telefono">Telefono</label>
       </div>
       <section id="errorTel" class="d-none">Formato de Telefono incorrecto</section>
       <div class="form-floating">
-        <input type="datetime-local" class="form-control" id="date" placeholder="Fecha" name="fecha">
+        <input type="date" class="form-control" id="date" placeholder="Fecha" name="fecha">
         <label for="fecha">Fecha</label>
       </div>
       

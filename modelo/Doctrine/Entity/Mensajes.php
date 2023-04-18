@@ -9,6 +9,7 @@ class Mensajes {
     /**
         @ORM\Id
         @ORM\Column(type="integer")
+        @ORM\GeneratedValue
     */
     private $idMensaje;
     /**

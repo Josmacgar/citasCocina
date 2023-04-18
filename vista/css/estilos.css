@@ -4,3 +4,27 @@ body{
 .error{
     padding: 0;
 }
+.ajustar{
+    display: inline-block;
+    /* width por defecto es 18 */
+    width: 25rem;
+    margin: 0.5% 0.5%;
+}
+.presentacion{
+    /* width: 230px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
+}
+.presentacion:hover{
+    display: block;
+}
+.ajustar:hover{
+    /* box-shadow: 0px 6px 8px 0.1px red; */
+    box-shadow: 0px 3px 5px 1px lightgray;
+}

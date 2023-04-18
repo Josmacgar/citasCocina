@@ -29,9 +29,9 @@ session_start();
 
 <body>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark   bg-dark" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#page-top"><i>citasCocina</i> </a>
+            <a class="navbar-brand" href="/citascocina/index.php"><i>citasCocina</i> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars ms-1"></i>
@@ -40,8 +40,13 @@ session_start();
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/citascocina/vista/Login.php">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <?php
+                    //se muestra login cuando no existe una sesion
+                    if (!isset($_SESSION['email'])) {
+                        echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/citascocina/vista/Login.php\">Login</a></li>";
+                    }
+                    ?>
+                    <li class="nav-item"><a class="nav-link" href="/citascocina/vista/noticias.php">Noticias</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     <?php
                     //se muestra cerrar sesion solo cuando existe una sesion
@@ -52,9 +57,16 @@ session_start();
                     <li class="nav-item">
                         <div class="btn-group">
                             <button type="button" class="btn  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-gear text-white"></i>
+                                <i class="bi bi-gear text-white"></i>
                             </button>
                             <ul class="dropdown-menu text-small">
+                                <?php
+                                //se muestra el nombre cuando exista una sesion
+                                if (isset($_SESSION['email'])) {
+                                    $nombre=$_SESSION["nombre"];
+                                    echo "<li><a class=\"dropdown-item\" href=\"#\">$nombre</a></li>";
+                                }
+                                ?>
                                 <li><a class="dropdown-item" href="#">Ajustes</a></li>
                                 <li><a class="dropdown-item" href="#">Admin</a></li>
                                 <li><a class="dropdown-item" href="#">Reservas</a></li>

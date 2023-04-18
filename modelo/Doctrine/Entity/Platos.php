@@ -9,6 +9,7 @@ class Platos {
     /**
         @ORM\Id
         @ORM\Column(type="integer")
+        @ORM\GeneratedValue
     */
     private $idPlato;
     /**

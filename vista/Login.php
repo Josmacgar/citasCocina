@@ -2,7 +2,6 @@
 // incluir header
 include("header.php");
 include("../controlador/controladorLogin.php");
-print_r($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
