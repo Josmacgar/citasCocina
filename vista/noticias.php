@@ -1,6 +1,7 @@
 <?php
 // incluir header
 include("header.php");
+
 use Doctrine\Common\Collections\ArrayCollection;
 // require_once dirname(__FILE__, 1) . "citasCocina/modelo/Doctrine/bootstrap.php";
 include("../modelo/Doctrine/bootstrap.php");
@@ -32,35 +33,67 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 </head>
 
 <body>
-<div id="tarjetas">
+    <p for="" id="botonAniadir">
+        <img src="/citascocina/vista/img/plus-circle.svg" alt="" id="imagenAniadir">
+    </p>
+    <div id="tarjetas">
         <?php
         $resultado = $entityManager->getRepository("noticias")
-        ->findAll();
-        print_r($resultado);
+            ->findAll();
         foreach ($resultado as $key) {
         ?>
 
             <div class="card ajustar">
-                <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $key['titulo'] ?></h3>
+                <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $key->getTitulo() ?></h3>
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $key['nombre'] ?></h5>
-                    <p class="card-text presentacion"><?php echo $key['presentacion'] ?>
-                    <p>Fecha: <?php echo $key['fecha_nac'] ?><br>
-                        Contacto:<?php echo $key['contacto'] ?><br>
-                        Programas:<?php echo ' ', $key['programas'] ?><br>
-                        Idiomas:<?php echo ' ', $key['idiomas'] ?> <br>
-                        ID:<?php echo ' ', $key['codCurriculum'] ?> <br>
-                    </p>
-                    </p>
-                    <a href="editarCurriculum.php?codCurriculum=<?php echo $key['codCurriculum'] ?>" class="btn btn-primary" id="editar">Editar</a>
-                    <a href="visualizacion.php?codCurriculum=<?php echo $key['codCurriculum'] ?>" class="btn btn-success" id="ver">Ver</a>
-                    <button class="btn btn-danger" id="borrar" onclick="eliminarDatos(<?php echo $key['codCurriculum'] ?>)">Borrar</button>
+                    <h5 class="card-title"><?php echo $key->getTitulo() ?></h5>
+                    <p class="card-text presentacion"><?php echo $key->getCuerpo() ?></p>
+                    <!-- <a href="visualizacion.php?codCurriculum=" class="btn btn-warning" onclick="verNoticia()">Ver</a> -->
+                    <!-- <button class="btn btn-warning" onclick="verNoticia()">Ver</button> -->
+                    <?php
+                    $id=$key->getIdNoticia();
+                    $titulo=$key->getTitulo();
+                    $cuerpo=$key->getCuerpo();
+                    ?>
+                    <a class="btn btn-warning" data-bs-toggle="modal" href="#portfolioModal1" onclick="verNoticia(<?php echo $id .',' .$titulo .',' . $cuerpo ?>)">
+                        boton
+                    </a>
                 </div>
             </div>
-
+            
+            <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="/citascocina/vista/assets/img/close-icon.svg" alt="Close modal" /></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase" id="idTitulo"></h2>
+                            <p><?php echo $key->getTitulo() ?></p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Fecha:</strong>
+                                    ${datos[2]}
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <i class="fas fa-xmark me-1"></i>
+                                Close Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         <?php
         }
         ?>
+
+        <script src="/citascocina/vista/js/crearNoticia.js"></script>
     </div>
 
 

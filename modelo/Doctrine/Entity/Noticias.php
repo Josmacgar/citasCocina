@@ -118,6 +118,25 @@ class Noticias {
 
         return $this;
     }
+        /**
+     * Get the value of idNoticia
+     */ 
+    public function getIdNoticia()
+    {
+        return $this->idNoticia;
+    }
+
+    /**
+     * Set the value of idNoticia
+     *
+     * @return  self
+     */ 
+    public function setIdNoticia($idNoticia)
+    {
+        $this->idNoticia = $idNoticia;
+
+        return $this;
+    }
 
     public function __toString() {
         return "Noticias: " . $this->getTitulo() . " - "

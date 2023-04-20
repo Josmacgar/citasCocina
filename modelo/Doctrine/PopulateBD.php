@@ -15,10 +15,17 @@ require_once dirname(__FILE__, 1) . "/Entity/Usuario.php";
 // // La persistencia se añade a cada objeto, al final se tiene que hacer un flush
 // $entityManager->persist($profesor);
 
-$resultado = $entityManager->getRepository("Profesor")
-    ->findOneBy(array('dni' => '5555'));
-    
-echo($resultado);
+$resultado = $entityManager->getRepository("usuario")
+    ->findOneBy(array('dni' => '00000'));
+   
+echo($resultado->getDni());
+
+$resultado = $entityManager->getRepository("noticias")
+->findAll();
+    foreach ($resultado as $key) {
+        echo ($key->getTitulo());
+    }
+// print_r($resultado);
 // $result = $entityManager->getRepository("Profesor")
 //     ->findAll();
 // print_r($result);
