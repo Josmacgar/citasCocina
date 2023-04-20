@@ -51,44 +51,46 @@ include("../modelo/Doctrine/Entity/Noticias.php");
                     <!-- <a href="visualizacion.php?codCurriculum=" class="btn btn-warning" onclick="verNoticia()">Ver</a> -->
                     <!-- <button class="btn btn-warning" onclick="verNoticia()">Ver</button> -->
                     <?php
-                    $id=$key->getIdNoticia();
-                    $titulo=$key->getTitulo();
-                    $cuerpo=$key->getCuerpo();
+                    $id = $key->getIdNoticia();
+                    $titulo = $key->getTitulo();
+                    $cuerpo = $key->getCuerpo();
+                    $fecha = $key->getFecha();
+                    $fecha_str = $fecha->format('d/m/Y');
                     ?>
-                    <a class="btn btn-warning" data-bs-toggle="modal" href="#portfolioModal1" onclick="verNoticia(<?php echo $id .',' .$titulo .',' . $cuerpo ?>)">
-                        boton
+                    <a class="btn btn-warning" data-bs-toggle="modal" href="#portfolioModal1" onclick="verNoticia('<?php echo $titulo ?>', '<?php echo $cuerpo ?>', '<?php echo $fecha_str ?>')">
+                        Ver
                     </a>
                 </div>
             </div>
-            
+
             <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="close-modal" data-bs-dismiss="modal"><img src="/citascocina/vista/assets/img/close-icon.svg" alt="Close modal" /></div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="modal-body">
-                            <!-- Project details-->
-                            <h2 class="text-uppercase" id="idTitulo"></h2>
-                            <p><?php echo $key->getTitulo() ?></p>
-                            <ul class="list-inline">
-                                <li>
-                                    <strong>Fecha:</strong>
-                                    ${datos[2]}
-                                </li>
-                            </ul>
-                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                <i class="fas fa-xmark me-1"></i>
-                                Close Project
-                            </button>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="close-modal" data-bs-dismiss="modal"><img src="/citascocina/vista/assets/img/close-icon.svg" alt="Close modal" /></div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                        <!-- Project details-->
+                                        <h2 class="text-uppercase" id="idTitulo"></h2>
+                                        <p id="idCuerpo"></p>
+                                        <ul class="list-inline">
+                                            <li>
+                                                <strong>Fecha:</strong>
+                                                <label id="idFecha"></label>
+                                            </li>
+                                        </ul>
+                                        <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                            <i class="fas fa-xmark me-1"></i>
+                                            Close Project
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
         <?php
         }
         ?>
