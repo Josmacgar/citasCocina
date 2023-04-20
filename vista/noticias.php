@@ -33,9 +33,12 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 </head>
 
 <body>
-    <p for="" id="botonAniadir">
-        <img src="/citascocina/vista/img/plus-circle.svg" alt="" id="imagenAniadir">
-    </p>
+    <?php
+        if(isset($_SESSION['email'])){
+            print_r($_SESSION);
+        }
+    ?>
+
     <div id="tarjetas">
         <?php
         $resultado = $entityManager->getRepository("noticias")
@@ -43,20 +46,18 @@ include("../modelo/Doctrine/Entity/Noticias.php");
         foreach ($resultado as $key) {
         ?>
 
+            <?php
+            $id = $key->getIdNoticia();
+            $titulo = $key->getTitulo();
+            $cuerpo = $key->getCuerpo();
+            $fecha = $key->getFecha();
+            $fecha_str = $fecha->format('d/m/Y');
+            ?>
             <div class="card ajustar">
                 <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $key->getTitulo() ?></h3>
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $key->getTitulo() ?></h5>
                     <p class="card-text presentacion"><?php echo $key->getCuerpo() ?></p>
-                    <!-- <a href="visualizacion.php?codCurriculum=" class="btn btn-warning" onclick="verNoticia()">Ver</a> -->
-                    <!-- <button class="btn btn-warning" onclick="verNoticia()">Ver</button> -->
-                    <?php
-                    $id = $key->getIdNoticia();
-                    $titulo = $key->getTitulo();
-                    $cuerpo = $key->getCuerpo();
-                    $fecha = $key->getFecha();
-                    $fecha_str = $fecha->format('d/m/Y');
-                    ?>
+                    <p class="card-text presentacion"><i><?php echo $fecha_str ?></i></p>
                     <a class="btn btn-warning" data-bs-toggle="modal" href="#portfolioModal1" onclick="verNoticia('<?php echo $titulo ?>', '<?php echo $cuerpo ?>', '<?php echo $fecha_str ?>')">
                         Ver
                     </a>
@@ -82,7 +83,7 @@ include("../modelo/Doctrine/Entity/Noticias.php");
                                         </ul>
                                         <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                             <i class="fas fa-xmark me-1"></i>
-                                            Close Project
+                                            Cerrar
                                         </button>
                                     </div>
                                 </div>

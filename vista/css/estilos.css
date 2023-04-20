@@ -44,3 +44,6 @@ body{
     /* align-content: center; */
     justify-content: center;
 }
+#botonAniadir:hover{
+cursor: pointer;
+}

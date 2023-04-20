@@ -21,11 +21,13 @@ function obtenerCredenciales($email){
 
     } else {
         $res = $result->fetch(PDO::FETCH_ASSOC);
+        $idUsuario = $res["idUsuario"];        
         $dni = $res["dni"];
         $contraseña = $res["contraseña"];
         $nombre=$res["nombre"];
         $baneado=$res['baneado'];
         $rol=$res['rol'];
-        return array($dni, $contraseña,$nombre,$baneado,$rol);
+        $email = $res["email"];
+        return array($idUsuario,$dni, $contraseña,$nombre,$baneado,$rol,$email);
     }
 }

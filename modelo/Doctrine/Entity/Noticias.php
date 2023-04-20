@@ -30,7 +30,7 @@ class Noticias {
 
     /**
         @ORM\ManyToOne(targetEntity="usuario")
-        @ORM\JoinColumn(name="usuario",referencedColumnName="dni")
+        @ORM\JoinColumn(name="usuario",referencedColumnName="idUsuario")
     */
     private $usuario;
 

@@ -13,11 +13,15 @@ include("../modelo/modeloUsuarios.php");
       if (encontrarUsuario($email)) {
         $credenciales = obtenerCredenciales($email); //devuelve array con los datos
         //si la contraseña es correcta crea la sesion y carga home
-        if ($credenciales[1] == $cifrarPassword) {
+        if ($credenciales[2] == $cifrarPassword) {
           session_start();
-          $_SESSION['email'] = $credenciales[0];
-          $_SESSION['nombre'] = $credenciales[2];
-          $_SESSION['codUsu'] = $credenciales[3];
+          $_SESSION['idUsuario'] = $credenciales[0];
+          $_SESSION['dni'] = $credenciales[1];
+          $_SESSION['contraseña'] = $credenciales[2];
+          $_SESSION['nombre'] = $credenciales[3];
+          $_SESSION['baneado'] = $credenciales[4];
+          $_SESSION['rol'] = $credenciales[5];
+          $_SESSION['email'] = $credenciales[6];
           // header("Location:../index.html");
           echo "<script type=\"text/javascript\">window.location.href = \"../index.php\";</script>";
         } else {

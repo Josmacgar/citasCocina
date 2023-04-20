@@ -24,7 +24,14 @@ class Platos {
         @ORM\Column(type="string")
     */
     private $tipo;
-
+    /**
+        @ORM\ManyToMany(targetEntity="Reservas")
+        @ORM\JoinTable(name="reservas_platos",
+            joinColumns={@ORM\JoinColumn(name="idPlato", referencedColumnName="idPlato")},
+            inverseJoinColumns={@ORM\JoinColumn(name="idReserva", referencedColumnName="idReserva", unique=true)}
+        )
+    */
+    private $reserva;
     
     function __construct(){
     }

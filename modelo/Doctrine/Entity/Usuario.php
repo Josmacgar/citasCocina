@@ -8,6 +8,11 @@ require(dirname(__FILE__, 2) . '/Repository/UsuarioRepository.php');
 class Usuario {
     /**
         @ORM\Id
+        @ORM\Column(type="integer")
+        @ORM\GeneratedValue
+    */
+    private $idUsuario;
+    /**
         @ORM\Column(type="string")
     */
     private $dni;
@@ -46,6 +51,14 @@ class Usuario {
         @ORM\Column(type="string")
     */
     private $rol;
+    /**
+        @ORM\ManyToMany(targetEntity="Reservas")
+        @ORM\JoinTable(name="reservas_cliente",
+            joinColumns={@ORM\JoinColumn(name="idUsuario", referencedColumnName="idUsuario")},
+            inverseJoinColumns={@ORM\JoinColumn(name="idReserva", referencedColumnName="idReserva", unique=true)}
+        )
+    */
+    private $reserva;
 
     function __construct(){
     }
@@ -227,7 +240,45 @@ class Usuario {
 
         return $this;
     }
+    /**
+     * Get the value of idUsuario
+     */ 
+    public function getIdUsuario()
+    {
+        return $this->idUsuario;
+    }
 
+    /**
+     * Set the value of idUsuario
+     *
+     * @return  self
+     */ 
+    public function setIdUsuario($idUsuario)
+    {
+        $this->idUsuario = $idUsuario;
+
+        return $this;
+    }
+    
+    /**
+     * Get the value of reserva
+     */ 
+    public function getReserva()
+    {
+        return $this->reserva;
+    }
+
+    /**
+     * Set the value of reserva
+     *
+     * @return  self
+     */ 
+    public function setReserva($reserva)
+    {
+        $this->reserva = $reserva;
+
+        return $this;
+    }
     public function __toString() {
         return "Usuarios: " . $this->getDni() . " - "
             . $this->getNombre() . " - "
