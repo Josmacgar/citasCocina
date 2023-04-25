@@ -34,8 +34,16 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 
 <body>
     <?php
-        if(isset($_SESSION['email'])){
-            print_r($_SESSION);
+    //if que muestra el icono de añadir noticias solo cuando el usuario de la sesion es profesor
+        if(isset($_SESSION['idUsuario'])){
+            //obtenemos el usuario de la sesion
+            $resultado = $entityManager->getRepository("usuario")
+            ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
+
+            //comprobamos que el rol de la sesion sea profesor
+            if ($resultado->getRol()=='profesor') {
+                echo" <p id=\"botonAniadir\"><a href=\"/citascocina/vista/registroNoticias.php\"><img id=\"imagenAniadir\" src=\"/citascocina/vista/img/plus-circle.svg\"></a></p>";
+            }
         }
     ?>
 
@@ -95,22 +103,8 @@ include("../modelo/Doctrine/Entity/Noticias.php");
         <?php
         }
         ?>
-
-        <script src="/citascocina/vista/js/crearNoticia.js"></script>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-    <script src="/citascocina/vista/js/validarRegistro.js"></script>
-    <script src="/citascocina/vista/js/validarLogin.js"></script>
+    <script src="/citascocina/vista/js/verNoticia.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

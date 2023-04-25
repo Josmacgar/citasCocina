@@ -35,6 +35,9 @@ body{
     margin-right: 5%;
     margin-top: 1.5%;
 }
+#botonAniadir:hover{
+    cursor: pointer;
+    }
 #imagenAniadir{
     scale: 1.5;
 }
@@ -44,6 +47,4 @@ body{
     /* align-content: center; */
     justify-content: center;
 }
-#botonAniadir:hover{
-cursor: pointer;
-}
+
