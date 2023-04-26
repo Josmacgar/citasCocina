@@ -1,129 +1,250 @@
+// nota importante, las funciones validarNombre y validarNombreVista y con las de cuerpo
+// estan separadas porque el evento keyup da conflicto con variables.
+// por eso hay una para datos y otra para mostrar errores
 
+let global =false;
+
+// NOMBRE
 function validarNombre() {
-    let datos=true;
-    document.querySelector('#nombre').addEventListener("keyup",function () {
-        let nombre = document.querySelector('#nombre').value;
-        if(nombre.length<3){
-            document.querySelector('#errorNombre').setAttribute("class","error");
-            document.querySelector('#nombre').setAttribute("class","form-control border  border-danger");
-            datos= false;
-        }else{
-            document.querySelector('#errorNombre').setAttribute("class","d-none");
-            document.querySelector('#nombre').setAttribute("class","form-control");
-            datos= true;
-        }
-    });
-    return datos;
+  let titulo = document.querySelector("#nombre").value;
+  if (titulo.length < 3) {
+    return false;
+  } else {
+    return true;
+  }
 }
-validarNombre();
-
- function validarEmail(){
-    let datos=true;
-    document.querySelector('#email').addEventListener("keyup",function () {
-        let email=document.getElementById('email').value;
-        let expresion =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-        if( expresion.test(email) ){
-            document.querySelector('#errorEmail').setAttribute("class","d-none");
-            document.querySelector('#email').setAttribute("class","form-control");
-            datos= true;
-        }else{
-            document.querySelector('#errorEmail').setAttribute("class","error");
-            document.querySelector('#email').setAttribute("class","form-control border  border-danger");
-            datos= false;
-        }
-    });
-    return datos;
-}
-validarEmail();
-
- function validarPassword() {
-    let datos=true;
-    document.querySelector('#password').addEventListener("keyup",function () {
-        let password = document.querySelector('#password').value;
-        let expresion = /(?=.*[a-z])(?=.*[A-Z])/;
-        if( expresion.test(password) ){
-            document.querySelector('#errorContraseña').setAttribute("class","d-none");
-            document.querySelector('#password').setAttribute("class","form-control");
-            datos= true;
-        }else{
-            document.querySelector('#errorContraseña').setAttribute("class","error");
-            document.querySelector('#password').setAttribute("class","form-control border  border-danger");
-            datos= false;
-        }
-    });
-    return datos;
-}
-validarPassword();
-function validarDni(){
-    let datos=true;
-    document.querySelector('#dni').addEventListener("keyup",function () {
-        let dni=document.getElementById('dni').value;
-        // /^[0-9]{8,8}[A-Za-z]$/ --este regez permite tambien la letra en minuscula
-        let expresion =  /^[0-9]{8,8}[A-Z]$/;
-        if( expresion.test(dni) ){
-            document.querySelector('#errorDni').setAttribute("class","d-none");
-            document.querySelector('#dni').setAttribute("class","form-control");
-            datos= true;
-        }else{
-            document.querySelector('#errorDni').setAttribute("class","error");
-            document.querySelector('#dni').setAttribute("class","form-control border  border-danger");
-            datos= false;
-        }
-    });
-    return datos;
-}
-validarDni();
-function validarApellidos(){
-    let datos=true;
-    document.querySelector('#apellidos').addEventListener("keyup",function () {
-        let ape=document.getElementById('apellidos').value;
-        let expresion =  /[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/;
-        if( expresion.test(ape) ){
-            document.querySelector('#errorApe').setAttribute("class","d-none");
-            document.querySelector('#apellidos').setAttribute("class","form-control");
-            datos= true;
-        }else{
-            document.querySelector('#errorApe').setAttribute("class","error");
-            document.querySelector('#apellidos').setAttribute("class","form-control border  border-danger");
-            datos= false;
-        }
-    });
-    return datos;
-}
-validarApellidos();
-function validarTelefono(){
-    let datos=true;
-    document.querySelector('#telefono').addEventListener("keyup",function () {
-        let tel=document.getElementById('telefono').value;
-        let expresion =  /^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/;
-        if( expresion.test(tel) ){
-            document.querySelector('#errorTel').setAttribute("class","d-none");
-            document.querySelector('#telefono').setAttribute("class","form-control");
-            datos= true;
-        }else{
-            document.querySelector('#errorTel').setAttribute("class","error");
-            document.querySelector('#telefono').setAttribute("class","form-control border  border-danger");
-            datos= false;
-        }
-    });
-    return datos;
-}
-validarTelefono();
-
-function validarFormulario() {
-    let nombre = validarNombre();
-    let email= validarEmail();
-    let contraseña=validarPassword();
-    let dni=validarDni();
-    let apellidos=validarApellidos();
-    let telefono=validarTelefono();
-
-    if(nombre==false||email==false||contraseña==false||dni==false||apellidos==false||telefono==false){
-        return false;
-    }else{
-        return true;
+function validarNombreVista() {
+  let titulo = document.querySelector("#nombre");
+  let errortitulo = document.querySelector("#errorNombre");
+  titulo.addEventListener("keyup", function () {
+    let nombre = titulo.value;
+    if (nombre.length < 3) {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border  border-danger");
+    } else {
+      errortitulo.setAttribute("class", "d-none");
+      titulo.setAttribute("class", "form-control");
     }
+  });
 }
-// validarFormulario();
+validarNombreVista();
 
-// export {validarEmail, validarPassword};
+// EMAIL
+function validarEmail() {
+  let email = document.querySelector("#email").value;
+  let expresion = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+  if (expresion.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function validarEmailVista() {
+  let titulo = document.querySelector("#email");
+  let errortitulo = document.querySelector("#errorEmail");
+  titulo.addEventListener("keyup", function () {
+    let email = titulo.value;
+    let expresion = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+    if (expresion.test(email)) {
+      errortitulo.setAttribute("class", "d-none");
+      titulo.setAttribute("class", "form-control");
+      console.log("true");
+    } else {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border border-danger");
+      console.log("false");
+    }
+  });
+}
+validarEmailVista();
+
+// PASSWORD
+function validarPassword() {
+  let password = document.querySelector("#password").value;
+  let expresion = /(?=.*[a-z])(?=.*[A-Z])/;
+  if (expresion.test(password)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function validarPasswordVista() {
+  let titulo = document.querySelector("#password");
+  let errortitulo = document.querySelector("#errorContraseña");
+  titulo.addEventListener("keyup", function () {
+    let password = titulo.value;
+    let expresion = /(?=.*[a-z])(?=.*[A-Z])/;
+    if (expresion.test(password)) {
+      errortitulo.setAttribute("class", "d-none");
+      titulo.setAttribute("class", "form-control");
+      console.log("true");
+    } else {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border border-danger");
+      console.log("false");
+    }
+  });
+}
+validarPasswordVista();
+
+// DNI
+// function validarDni() {
+//     let password = document.querySelector('#dni').value;
+//     let expresion =  /^[0-9]{8,8}[A-Z]$/;
+//     if(expresion.test(password)){
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
+// function validarDni() {
+//     let dni = $('#dni').val();
+  
+//     // Realizar petición AJAX con jQuery al controlador de login
+//     $.ajax({
+//       url: '/citascocina/controlador/pruebaAjax.php',
+//       method: 'POST',
+//       data: {
+//         dni: dni,
+//         tipo: 'dni'
+//       },
+//       success: function(respuesta) {
+        // if (!respuesta) {
+        //   // Si el DNI es válido, verificar la expresión regular
+        //   let expresion = /^[0-9]{8,8}[A-Z]$/;
+        //   if (expresion.test(dni)) {
+        //     alert('El DNI es válido y está registrado en el sistema.');
+        //     $('#dni').val(dni);
+        //   } else {
+        //     alert('El DNI es inválido.');
+        //   }
+        // } else {
+//           alert('El DNI no está registrado en el sistema.');
+//         }
+//       },
+//       error: function() {
+//         alert('Ha ocurrido un error al comprobar el DNI.');
+//       }
+//     });
+//   }
+function validarDni() {
+    global=global;
+   let dni= document.querySelector('#dni').value;
+   $.ajax({
+       type:"POST",
+       url:"/citascocina/controlador/controladorRegistroNoticia.php",
+      data: {
+        dni: dni,
+        tipo: 'dni'
+      },
+   }).done(function(respuesta){
+    if (respuesta){
+        alert('Existe BD');
+        global= false;
+    }else {
+        let expresion = /^[0-9]{8,8}[A-Z]$/;
+        if (expresion.test(dni)) {
+            global= true;
+        }
+        // alert('Nadaa');
+    }
+   });
+  }
+
+  
+  
+
+function validarDnidVista() {
+  let titulo = document.querySelector("#dni");
+  let errortitulo = document.querySelector("#errorDni");
+  titulo.addEventListener("keyup", function () {
+    let dni = titulo.value;
+    let expresion = /^[0-9]{8,8}[A-Z]$/;
+    if (expresion.test(dni)) {
+      errortitulo.setAttribute("class", "d-none");
+      titulo.setAttribute("class", "form-control");
+    } else {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border border-danger");
+    }
+  });
+}
+validarDnidVista();
+
+// APELLIDOS
+function validarApellidos() {
+  let apellidos = document.querySelector("#apellidos").value;
+  if (apellidos.length < 3) {
+    return false;
+  } else {
+    return true;
+  }
+}
+function validarApellidosVista() {
+  let titulo = document.querySelector("#apellidos");
+  let errortitulo = document.querySelector("#errorApe");
+  titulo.addEventListener("keyup", function () {
+    let apellidos = titulo.value;
+    if (apellidos.length < 3) {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border  border-danger");
+    } else {
+      errortitulo.setAttribute("class", "d-none");
+      titulo.setAttribute("class", "form-control");
+    }
+  });
+}
+validarApellidosVista();
+
+// TELEFONO
+function validarTelefono() {
+  let telefono = document.querySelector("#telefono").value;
+  let expresion = /^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/;
+  if (expresion.test(telefono)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function validarTelefonoVista() {
+  let titulo = document.querySelector("#telefono");
+  let errortitulo = document.querySelector("#errorTel");
+  titulo.addEventListener("keyup", function () {
+    let telefono = titulo.value;
+    let expresion = /^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/;
+    if (expresion.test(telefono)) {
+      errortitulo.setAttribute("class", "d-none");
+      titulo.setAttribute("class", "form-control");
+      console.log("true");
+    } else {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border border-danger");
+      console.log("false");
+    }
+  });
+}
+validarTelefonoVista();
+
+//funcion la cual es comprobada por onsubmit que recoge las variables y devuelve true o false
+function validarFormulario() {
+  let nombre = validarNombre();
+  let email = validarEmail();
+  let contraseña = validarPassword();
+  let dni = validarDni();
+  let apellidos = validarApellidos();
+  let telefono = validarTelefono();
+  
+console.log(global);
+  if (
+    nombre == false ||
+    email == false ||
+    contraseña == false ||
+    dni == false ||
+    apellidos == false ||
+    telefono == false
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}

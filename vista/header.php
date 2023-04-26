@@ -65,9 +65,10 @@ session_start();
                                 if (isset($_SESSION['email'])) {
                                     $nombre=$_SESSION["nombre"];
                                     echo "<li><a class=\"dropdown-item\" href=\"#\">$nombre</a></li>";
+                                    echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/editarPerfil.php\">Perfil</a></li>";
                                 }
                                 ?>
-                                <li><a class="dropdown-item" href="#">Ajustes</a></li>
+
                                 <li><a class="dropdown-item" href="#">Admin</a></li>
                                 <li><a class="dropdown-item" href="#">Reservas</a></li>
                                 <li>

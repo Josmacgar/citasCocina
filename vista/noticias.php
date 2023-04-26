@@ -41,7 +41,7 @@ include("../modelo/Doctrine/Entity/Noticias.php");
             ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
 
             //comprobamos que el rol de la sesion sea profesor
-            if ($resultado->getRol()=='profesor') {
+            if ($resultado->getRol()=='profesor'||$resultado->getRol()=='admin') {
                 echo" <p id=\"botonAniadir\"><a href=\"/citascocina/vista/registroNoticias.php\"><img id=\"imagenAniadir\" src=\"/citascocina/vista/img/plus-circle.svg\"></a></p>";
             }
         }

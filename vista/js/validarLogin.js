@@ -16,7 +16,7 @@ function comprobarEmail(evt){
         //enviamos el submit
         form.submit();
     }else {
-        document.getElementById('error').innerHTML="Email incorrecto";
+        document.getElementById('error').innerHTML="El email no existe";
     }
    });
 
