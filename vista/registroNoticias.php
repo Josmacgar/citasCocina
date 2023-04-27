@@ -51,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
       <h1 class="h3 mb-3 fw-normal"><?php echo isset($modo) ? 'Editar' : 'Registrar Noticia'; ?></h1>
       <input hidden type="text" name="modo" value="<?php if (isset($modo)) echo ($modo); ?>">
+      <input hidden type="text" name="idNoticia" value="<?php if (isset($idNoticia)) echo ($idNoticia); ?>">
       <div class="form-floating">
         <input type="text" class="form-control" id="titulo" placeholder="49558744A" name="titulo" value="<?php if (isset($modo)) echo ($datos->getTitulo()); ?>">
         <label for="titulo">Titulo</label>

@@ -10,7 +10,7 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 // C:\xampp\htdocs\citasCocina\modelo\Doctrine\PopulateBD.php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id=$_POST['id'];
+    $id=$_POST['idNoticia'];
     $noticia = $entityManager->getRepository("noticias")
     ->findOneBy(array('idNoticia' => $id));
 

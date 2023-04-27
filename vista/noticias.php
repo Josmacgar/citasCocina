@@ -35,6 +35,7 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 </head>
 
 <body>
+    <div id="contenedor">
     <?php
     //if que muestra el icono de añadir noticias solo cuando el usuario de la sesion es profesor
         if(isset($_SESSION['idUsuario'])){
@@ -75,8 +76,8 @@ include("../modelo/Doctrine/Entity/Noticias.php");
                     //solo se puede eliminar noticias si es profesor o admin
                     if (isset($_SESSION['idUsuario'])) {
                        if ($_SESSION['rol']=='profesor'||$_SESSION['rol']=='admin') {
-                       echo " <a class=\"btn btn-danger\"  onclick=\"if(confirm('¿Estás seguro de que deseas eliminar esta noticia?')){EliminarNoticia('" . $id . "')}\">Eliminar</a>";
-                       echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idNoticia=$id\">Editar</a>";
+                       echo " <a data-id=\"$id\" class=\"eliminarNoticia btn btn-danger\">Eliminar</a>";
+                        echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idNoticia=$id\">Editar</a>";
                        }
                     }
                     ?>
@@ -114,6 +115,7 @@ include("../modelo/Doctrine/Entity/Noticias.php");
         <?php
         }
         ?>
+    </div>
     </div>
     <script src="/citascocina/vista/js/verNoticia.js"></script>
     <script src="/citascocina/vista/js/eliminarNoticias.js"></script>

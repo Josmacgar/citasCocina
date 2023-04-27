@@ -9,18 +9,13 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 // require_once dirname(__FILE__, 1) . "modelo/Doctrine/Entity/Usuario.php";
 // C:\xampp\htdocs\citasCocina\modelo\Doctrine\PopulateBD.php
 $findUsuario = true;
-//obtenemos el id de noticia
-$idNoticia=0;
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if(isset($_GET['idNoticia'])){
-        $idNoticia=$_GET['idNoticia'];
-    }
-}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $titulo = $_POST['titulo'];
     $contenido = $_POST['contenido'];
     $date = $_POST['date'];
     $modo=$_POST['modo'];
+    $idNoticia=$_POST['idNoticia'];
 
     if (isset($_POST['tipo']) && $_POST['tipo'] == 'dni') {
         function comprobarDni(){
@@ -37,12 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo comprobarDni();
     }elseif ($modo=='editar'){
         session_start();
-        $noticiaEditar = $entityManager->getRepository("noticias")
-        ->findOneBy(array('idNoticia' => 55));
+        $noticiaEditar= new Noticias();
+        $noticiaEditar = $entityManager->getRepository("noticias")->findOneBy(array('idNoticia' => $idNoticia));
 
         $usuario=new Usuario();
         $usuario = $entityManager->getRepository("usuario")
-        ->findOneBy(array('idUsuario' => 22));
+        ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
         $noticiaEditar->setUsuario($usuario);
         $noticiaEditar->setTitulo($titulo);
         $noticiaEditar->setCuerpo($contenido);
