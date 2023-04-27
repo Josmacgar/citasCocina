@@ -76,7 +76,27 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                     <td><?php echo $fecha_str ?></td>
                     <td><?php echo $key->getEmail() ?></td>
                     <td><?php echo $key->getTelefono() ?></td>
-                    <td><?php echo $key->getBaneado() ?></td>
+                    <!-- BANEADO -->
+                    <td>
+                        <?php
+                        //if para crear el segundo option. obtiene el valor por defecto y lo cambia 
+                        $baneo = $key->getBaneado();
+                        $segundoBaneo = 0;
+                        if ($baneo == 0) {
+                            $segundoBaneo = 1;
+                        } else {
+                            $segundoBaneo = 0;
+                        }
+                        ?>
+                        <!-- En el select enviamos los datos mediante data hacia el ajax -->
+                        <!-- tambien desabilitamos el select si el rol es admin -->
+                        <select name="baneo" id="baneo" class="baneo-select form-select form-select-sm" aria-label=".form-select-sm example"
+                        data-usu="<?php echo $key->getIdUsuario() ?>" 
+                        <?php if($key->getRol()=='admin') echo 'disabled'?>>
+                            <option value="<?php echo $baneo ?>" selected><?php echo $baneo ?></option>
+                            <option value="<?php echo $segundoBaneo ?>"><?php echo $segundoBaneo ?></option>
+                        </select>
+                    </td>
                     <!-- ROL -->
                     <td>
                         <?php
@@ -110,7 +130,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
 
 
 
-    <script src="/citascocina/vista/js/cambiarRol.js"></script>
+    <script src="/citascocina/vista/js/listarUsuarios.js"></script>
     <!-- Bootstrap core JS-->
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
