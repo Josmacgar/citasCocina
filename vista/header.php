@@ -78,7 +78,7 @@ session_start();
                                     }
                                 }
                                 ?>
-                                <li><a class="dropdown-item" href="#">Reservas</a></li>
+                                <li><a class="dropdown-item" href="/citascocina/vista/platos.php">Platos</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

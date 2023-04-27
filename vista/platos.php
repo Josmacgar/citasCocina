@@ -5,7 +5,7 @@ include("header.php");
 use Doctrine\Common\Collections\ArrayCollection;
 // require_once dirname(__FILE__, 1) . "citasCocina/modelo/Doctrine/bootstrap.php";
 include("../modelo/Doctrine/bootstrap.php");
-include("../modelo/Doctrine/Entity/Noticias.php");
+include("../modelo/Doctrine/Entity/Platos.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,46 +35,44 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 </head>
 
 <body>
-    <div id="contenedor">
-    <?php
+<div id="contenedor">
+<?php
     //if que muestra el icono de añadir noticias solo cuando el usuario de la sesion es profesor
         if(isset($_SESSION['idUsuario'])){
             //comprobamos que el rol de la sesion sea profesor
             if ($_SESSION['rol']=='profesor'||$_SESSION['rol']=='admin') {
-                echo" <p id=\"botonAniadir\"><a href=\"/citascocina/vista/registroNoticias.php\"><img id=\"imagenAniadir\" src=\"/citascocina/vista/img/plus-circle.svg\"></a></p>";
+                echo" <p id=\"botonAniadir\"><a href=\"/citascocina/vista/registroPlatos.php\"><img id=\"imagenAniadir\" src=\"/citascocina/vista/img/plus-circle.svg\"></a></p>";
             }
         }
     ?>
 
     <div id="tarjetas">
         <?php
-        $resultado = $entityManager->getRepository("noticias")
+        $resultado = $entityManager->getRepository("platos")
             ->findAll();
         foreach ($resultado as $key) {
         ?>
 
             <?php
-            $id = $key->getIdNoticia();
-            $titulo = $key->getTitulo();
-            $cuerpo = $key->getCuerpo();
-            $fecha = $key->getFecha();
-            $fecha_str = $fecha->format('d/m/Y');
+            $id = $key->getIdPlato();
+            $nombre = $key->getNombre();
+            $imagen = $key->getImagen();
+            $tipo = $key->getTipo();
             ?>
             <div class="card ajustar">
-                <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $key->getTitulo() ?></h3>
+                <h6 class="imagen-centrar" aria-expanded="false">
+                    <img class="rounded-circle" src=<?php echo $imagen ?> width="50%" height="50%" alt="imagen">
+                </h6>
+                <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $nombre ?></h3>
                 <div class="card-body">
-                    <p class="card-text presentacion"><?php echo $key->getCuerpo() ?></p>
-                    <p class="card-text presentacion"><i><?php echo $fecha_str ?></i></p>
-                    <a class="btn btn-primary" data-bs-toggle="modal" href="#portfolioModal1" onclick="verNoticia('<?php echo $titulo ?>', '<?php echo $cuerpo ?>', '<?php echo $fecha_str ?>')">
-                        Ver
-                    </a>
+
+                    <p class="card-text presentacion"><?php echo $tipo == 'postre' ? 'postre' : $tipo.'º Plato'; ?></p>
                     <?php
                     //solo se puede eliminar noticias si es profesor o admin
                     if (isset($_SESSION['idUsuario'])) {
                        if ($_SESSION['rol']=='profesor'||$_SESSION['rol']=='admin') {
-                       echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idNoticia=$id\">Editar</a>";
+                       echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idPlato=$id\">Editar</a>";
                        echo " <a data-id=\"$id\" class=\"eliminarNoticia btn btn-danger\">Eliminar</a>";
-
                        }
                     }
                     ?>
@@ -114,11 +112,8 @@ include("../modelo/Doctrine/Entity/Noticias.php");
         ?>
     </div>
     </div>
-    <script src="/citascocina/vista/js/verNoticia.js"></script>
-    <script src="/citascocina/vista/js/eliminarNoticias.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
     <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
