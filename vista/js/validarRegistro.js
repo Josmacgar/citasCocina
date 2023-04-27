@@ -132,7 +132,7 @@ function validarDni() {
    let dni= document.querySelector('#dni').value;
    $.ajax({
        type:"POST",
-       url:"/citascocina/controlador/controladorRegistroNoticia.php",
+      //  url:"/citascocina/controlador/controladorRegistroNoticia.php", NO ENTIENDO PORQUE VA A NOTICIAS
       data: {
         dni: dni,
         tipo: 'dni'

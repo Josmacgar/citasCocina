@@ -17,6 +17,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>citasCocina</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="vista/assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -41,7 +42,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
     </main>
 
 
-    <table class="table">
+    <table class="table" id="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -76,7 +77,27 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                     <td><?php echo $key->getEmail() ?></td>
                     <td><?php echo $key->getTelefono() ?></td>
                     <td><?php echo $key->getBaneado() ?></td>
-                    <td><?php echo $key->getRol() ?></td>
+                    <!-- ROL -->
+                    <td>
+                        <?php
+                        //if para crear el segundo option. obtiene el valor por defecto y lo cambia 
+                        $rol = $key->getRol();
+                        $segundoRol = '';
+                        if ($rol == 'profesor') {
+                            $segundoRol = 'cliente';
+                        } else {
+                            $segundoRol = 'profesor';
+                        }
+                        ?>
+                        <!-- En el select enviamos los datos mediante data hacia el ajax -->
+                        <!-- tambien desabilitamos el select si el rol es admin -->
+                        <select name="rol" id="rol" class="rol-select form-select form-select-sm" aria-label=".form-select-sm example"
+                        data-usu="<?php echo $key->getIdUsuario() ?>" data-banear="<?php echo $key->getBaneado() ?>" 
+                        <?php if($rol=='admin') echo 'disabled'?>>
+                            <option value="<?php echo $rol ?>" selected><?php echo $rol ?></option>
+                            <option value="<?php echo $segundoRol ?>"><?php echo $segundoRol ?></option>
+                        </select>
+                    </td>
                 </tr>
             </tbody>
             <?php $contador += 1; ?>
@@ -89,7 +110,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
 
 
 
-
+    <script src="/citascocina/vista/js/listarUsuarios.js"></script>
     <!-- Bootstrap core JS-->
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
