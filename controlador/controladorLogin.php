@@ -12,8 +12,8 @@ include("../modelo/modeloUsuarios.php");
       //si el usuario existe en bd obtiene los credenciales para comprobar password 
       if (encontrarUsuario($email)) {
         $credenciales = obtenerCredenciales($email); //devuelve array con los datos
-        //si la contraseña es correcta crea la sesion y carga home
-        if ($credenciales[2] == $cifrarPassword) {
+        //si la contraseña es correcta y el usuario no esta baneado crea la sesion y carga home
+        if ($credenciales[2] == $cifrarPassword && $credenciales[4]==0) {
           session_start();
           $_SESSION['idUsuario'] = $credenciales[0];
           $_SESSION['dni'] = $credenciales[1];
@@ -25,7 +25,15 @@ include("../modelo/modeloUsuarios.php");
           // header("Location:../index.html");
           echo "<script type=\"text/javascript\">window.location.href = \"../index.php\";</script>";
         } else {
-          header("Location:../vista/login.php?email=$email&errorPassword=true");
+          //if que comprueba si el usuario esta baneado 
+          if ($credenciales[4]==1) {
+            header("Location:../vista/login.php?email=$email&baneado=1");
+          }
+          //if que comprueba si la contraseña no son correctas
+          if ($credenciales[2]!=$cifrarPassword) {
+            header("Location:../vista/login.php?email=$email&errorPassword=true");
+          }
+
           $errorPassword = true;
 
           // echo "<script type=\"text/javascript\">window.location.href = \"../vista/login.php\";</script>";

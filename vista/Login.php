@@ -61,8 +61,10 @@ include("../controlador/controladorLogin.php");
             if(isset($_GET['errorPassword'])){
               if($_GET['errorPassword']==true){ echo "Error en la contraseña";}
             }
-
              if($usuarioNoregistrado==true){echo "Usuario no registrado";}
+             if(isset($_GET['baneado'])){
+              if($_GET['baneado']==1){ echo "Usuario baneado";}
+            }
         
             ?>
           </p>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +39,7 @@ session_start();
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/citascocina/index.php">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                     <?php
                     //se muestra login cuando no existe una sesion
@@ -63,13 +64,20 @@ session_start();
                                 <?php
                                 //se muestra el nombre cuando exista una sesion
                                 if (isset($_SESSION['email'])) {
-                                    $nombre=$_SESSION["nombre"];
-                                    echo "<li><a class=\"dropdown-item\" href=\"#\">$nombre</a></li>";
+                                    $nombre = $_SESSION["nombre"];
+                                    echo "<li><a class=\"dropdown-item\" >$nombre</a></li>";
                                     echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/editarPerfil.php\">Perfil</a></li>";
                                 }
                                 ?>
 
-                                <li><a class="dropdown-item" href="#">Admin</a></li>
+                                <?php
+                                //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
+                                if (isset($_SESSION['idUsuario'])) {
+                                    if ($_SESSION['rol']=='profesor'||$_SESSION['rol']=='admin') {
+                                        echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/listarUsuarios.php\">Usuarios</a></li>";
+                                    }
+                                }
+                                ?>
                                 <li><a class="dropdown-item" href="#">Reservas</a></li>
                                 <li>
                                     <hr class="dropdown-divider">

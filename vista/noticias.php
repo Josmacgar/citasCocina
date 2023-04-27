@@ -29,6 +29,8 @@ include("../modelo/Doctrine/Entity/Noticias.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="/citascocina/vista/js/alertify/css/alertify.css">
+    <script src="/citascocina/vista/js/alertify/alertify.js"></script>
 
 </head>
 
@@ -66,9 +68,18 @@ include("../modelo/Doctrine/Entity/Noticias.php");
                 <div class="card-body">
                     <p class="card-text presentacion"><?php echo $key->getCuerpo() ?></p>
                     <p class="card-text presentacion"><i><?php echo $fecha_str ?></i></p>
-                    <a class="btn btn-warning" data-bs-toggle="modal" href="#portfolioModal1" onclick="verNoticia('<?php echo $titulo ?>', '<?php echo $cuerpo ?>', '<?php echo $fecha_str ?>')">
+                    <a class="btn btn-primary" data-bs-toggle="modal" href="#portfolioModal1" onclick="verNoticia('<?php echo $titulo ?>', '<?php echo $cuerpo ?>', '<?php echo $fecha_str ?>')">
                         Ver
                     </a>
+                    <?php
+                    //solo se puede eliminar noticias si es profesor o admin
+                    if (isset($_SESSION['idUsuario'])) {
+                       if ($_SESSION['rol']=='profesor'||$_SESSION['rol']=='admin') {
+                       echo " <a class=\"btn btn-danger\"  onclick=\"if(confirm('¿Estás seguro de que deseas eliminar esta noticia?')){EliminarNoticia('" . $id . "')}\">Eliminar</a>";
+                       echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idNoticia=$id\">Editar</a>";
+                       }
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -105,6 +116,7 @@ include("../modelo/Doctrine/Entity/Noticias.php");
         ?>
     </div>
     <script src="/citascocina/vista/js/verNoticia.js"></script>
+    <script src="/citascocina/vista/js/eliminarNoticias.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

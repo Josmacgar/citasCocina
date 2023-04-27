@@ -25,7 +25,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       $cifrarpassword= hash("sha256",$password);
       $usuEditar = $entityManager->getRepository("usuario")
       ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
-      echo $usuEditar;
       $usuEditar->setDni($dni);
       $usuEditar->setNombre($nombre);
       $usuEditar->setApellidos($apellidos);

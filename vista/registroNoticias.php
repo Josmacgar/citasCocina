@@ -2,6 +2,20 @@
 // incluir header
 include("header.php");
 include("../controlador/controladorRegistroNoticia.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+  //obtetemos el modo su hay un get y obtenemos los datos del usuario
+  //para imprimirlos en los input para editar
+  if (isset($_GET['modo'])) {
+    //obtenemos el id de la noticia a editar
+    if (isset($_GET['idNoticia'])) {
+      $idNoticia=$_GET['idNoticia'];
+    }
+    $modo = $_GET['modo'];
+    $datos = $entityManager->getRepository("noticias")
+      ->findOneBy(array('idNoticia' => $idNoticia));
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,17 +49,17 @@ include("../controlador/controladorRegistroNoticia.php");
         <img class="mb-4" src="/citascocina/vista/img/noticia.png" alt="" width="72" height="57">
       </div>
 
-      <h1 class="h3 mb-3 fw-normal">Registrar Noticia</h1>
-
+      <h1 class="h3 mb-3 fw-normal"><?php echo isset($modo) ? 'Editar' : 'Registrar Noticia'; ?></h1>
+      <input hidden type="text" name="modo" value="<?php if (isset($modo)) echo ($modo); ?>">
       <div class="form-floating">
-        <input type="text" class="form-control" id="titulo" placeholder="49558744A" name="titulo">
+        <input type="text" class="form-control" id="titulo" placeholder="49558744A" name="titulo" value="<?php if (isset($modo)) echo ($datos->getTitulo()); ?>">
         <label for="titulo">Titulo</label>
       </div>
       <section id="errortitulo" class="d-none">Formato de Titulo incorrecto</section>
       <div class="form-floating">
          <!-- <input type="text" class="form-control" id="nombre" placeholder="name@example.com" name="nombre"> -->
 
-        <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="10" placeholder="Contenido..."></textarea>
+        <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="10" placeholder="Contenido..."><?php if (isset($modo)) echo ($datos->getCuerpo()); ?></textarea>
         <label for="contenido">Contenido</label> 
       </div>
       <section id="errorContenido" class="d-none">Formato de Contenido incorrecto</section>
@@ -55,8 +69,7 @@ include("../controlador/controladorRegistroNoticia.php");
         <label for="fecha">Fecha</label>
       </div>
       <section id="errorDate" class="d-none">Formato de fecha incorrecto</section>
-      
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Crear</button>
+      <button class="w-100 btn btn-lg btn-primary" type="submit"><?php echo isset($modo) ? 'Editar' : 'Crear'; ?></button>
     </form>
 
   </main>

@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
           echo "<input readonly type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email\" name=\"email\" value=\"" . (isset($modo) ? $datos->getEmail() : "") . "\">";
           echo "<label for=\"email\">Email</label>";
         } else {
-          echo "<input readonly type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email\" name=\"email\" value=\"" . (isset($modo) ? $datos->getEmail() : "") . "\">";
+          echo "<input type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email\" name=\"email\" value=\"" . (isset($modo) ? $datos->getEmail() : "") . "\">";
           echo "<label for=\"email\">Email</label>";
         }
         ?>
