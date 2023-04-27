@@ -42,7 +42,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
     </main>
 
 
-    <table class="table" id="table">
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>

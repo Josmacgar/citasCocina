@@ -12,12 +12,23 @@ include("../modelo/Doctrine/Entity/Usuario.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idUsuario=$_POST['idUsuario'];
     $valor=$_POST['valor'];
+    $modo=$_POST['modo'];
+
+    if ($modo=='rol') {
+        $usuario = $entityManager->getRepository("usuario")
+        ->findOneBy(array('idUsuario' => $idUsuario));
+    
+        $usuario->setRol($valor);
+        $entityManager->persist($usuario);
+        $entityManager->flush();
+    }else{
+        $usuario = $entityManager->getRepository("usuario")
+        ->findOneBy(array('idUsuario' => $idUsuario));
+    
+        $usuario->setBaneado($valor);
+        $entityManager->persist($usuario);
+        $entityManager->flush();
+    }
 
 
-    $usuario = $entityManager->getRepository("usuario")
-    ->findOneBy(array('idUsuario' => $idUsuario));
-
-    $usuario->setRol($valor);
-    $entityManager->persist($usuario);
-    $entityManager->flush();
 }
