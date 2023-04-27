@@ -92,7 +92,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                         <!-- En el select enviamos los datos mediante data hacia el ajax -->
                         <!-- tambien desabilitamos el select si el rol es admin -->
                         <select name="rol" id="rol" class="rol-select form-select form-select-sm" aria-label=".form-select-sm example"
-                        data-usu="<?php echo $key->getIdUsuario() ?>" data-banear="<?php echo $key->getBaneado() ?>" 
+                        data-usu="<?php echo $key->getIdUsuario() ?>" 
                         <?php if($rol=='admin') echo 'disabled'?>>
                             <option value="<?php echo $rol ?>" selected><?php echo $rol ?></option>
                             <option value="<?php echo $segundoRol ?>"><?php echo $segundoRol ?></option>
@@ -110,7 +110,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
 
 
 
-    <script src="/citascocina/vista/js/listarUsuarios.js"></script>
+    <script src="/citascocina/vista/js/cambiarRol.js"></script>
     <!-- Bootstrap core JS-->
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
