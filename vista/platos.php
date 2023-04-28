@@ -71,8 +71,8 @@ include("../modelo/Doctrine/Entity/Platos.php");
                     //solo se puede eliminar noticias si es profesor o admin
                     if (isset($_SESSION['idUsuario'])) {
                        if ($_SESSION['rol']=='profesor'||$_SESSION['rol']=='admin') {
-                       echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idPlato=$id\">Editar</a>";
-                       echo " <a data-id=\"$id\" class=\"eliminarNoticia btn btn-danger\">Eliminar</a>";
+                       echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroPlatos.php?modo=editar&idPlato=$id\">Editar</a>";
+                       echo " <a data-id=\"$id\" class=\"eliminarPlato btn btn-danger\">Eliminar</a>";
                        }
                     }
                     ?>
@@ -116,6 +116,7 @@ include("../modelo/Doctrine/Entity/Platos.php");
     <!-- Bootstrap core JS-->
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
+    <script src="/citascocina/vista/js/eliminarPlatos.js"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

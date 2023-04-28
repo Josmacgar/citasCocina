@@ -73,7 +73,7 @@ session_start();
                                 <?php
                                 //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
                                 if (isset($_SESSION['idUsuario'])) {
-                                    if ($_SESSION['rol']=='profesor'||$_SESSION['rol']=='admin') {
+                                    if ($_SESSION['rol']=='admin') {
                                         echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/listarUsuarios.php\">Usuarios</a></li>";
                                     }
                                 }

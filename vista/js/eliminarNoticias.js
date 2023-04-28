@@ -55,7 +55,9 @@ $(document).on('click', '.eliminarNoticia', function(){
               idNoticia: idNoticia,
           },
           success: function (respuesta) {
+              alertify.success('Eliminado');
               $('#contenedor').load(' #contenedor');
+
           },
           error: function () {
               console.log("Ha ocurrido un error al enviar la petición AJAX");

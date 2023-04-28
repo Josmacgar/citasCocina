@@ -3,8 +3,9 @@ include("../modelo/modeloUsuarios.php");
 use Doctrine\Common\Collections\ArrayCollection;
 // require_once dirname(__FILE__, 1) . "citasCocina/modelo/Doctrine/bootstrap.php";
 include("../modelo/Doctrine/bootstrap.php");
-include("../modelo/Doctrine/Entity/Usuario.php");
 include("../modelo/Doctrine/Entity/Platos.php");
+include("../modelo/Doctrine/Entity/Usuario.php");
+
 
 // require_once dirname(__FILE__, 1) . "modelo/Doctrine/Entity/Usuario.php";
 // C:\xampp\htdocs\citasCocina\modelo\Doctrine\PopulateBD.php
@@ -32,18 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // echo comprobarDni();
     }elseif ($modo=='editar'){
         session_start();
-        $noticiaEditar= new Noticias();
-        $noticiaEditar = $entityManager->getRepository("noticias")->findOneBy(array('idNoticia' => $idNoticia));
+        $platoEditar= new Platos();
+        $platoEditar = $entityManager->getRepository("platos")->findOneBy(array('idPlato' => $idPlato));
 
-        $usuario=new Usuario();
-        $usuario = $entityManager->getRepository("usuario")
-        ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
-        $noticiaEditar->setUsuario($usuario);
-        $noticiaEditar->setTitulo($titulo);
-        $noticiaEditar->setCuerpo($contenido);
-        $fecha = new DateTime($date);
-        $noticiaEditar->setFecha($fecha);
-        $entityManager->persist($noticiaEditar);
+        $platoEditar->setNombre($nombre);
+        $platoEditar->setImagen($imagen);
+        $platoEditar->setTipo($tipo);
+        $entityManager->persist($platoEditar);
         $entityManager->flush();
         header("Location:/citascocina/vista/platos.php");
     }else{    

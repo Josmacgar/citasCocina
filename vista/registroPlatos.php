@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
       $idPlato=$_GET['idPlato'];
     }
     $modo = $_GET['modo'];
-    $datos = $entityManager->getRepository("noticias")
+    $datos = $entityManager->getRepository("platos")
       ->findOneBy(array('idPlato' => $idPlato));
   }
 }
