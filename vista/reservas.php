@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 // require_once dirname(__FILE__, 1) . "citasCocina/modelo/Doctrine/bootstrap.php";
 include("../modelo/Doctrine/bootstrap.php");
 include("../modelo/Doctrine/Entity/Reservas.php");
+include("../modelo/Doctrine/Entity/Platos.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +52,20 @@ include("../modelo/Doctrine/Entity/Reservas.php");
             $resultado = $entityManager->getRepository("reservas")
                 ->findAll();
             foreach ($resultado as $key) {
+
+                $platos = $entityManager->getRepository("platos")
+                ->findPLatos($key->getIdReserva());
+                //obtenemos solo el dato que queremos 
+                $nombrePlato = array_column($platos, 'nombre');
+                $tipoPlato = array_column($platos, 'tipo');
+                $imagen = array_column($platos, 'imagen');
+
+                //convertimos los datos anteriores a cadena de texto
+                $convertNombre= implode(',',$nombrePlato);
+                $convertTipo= implode(',',$tipoPlato);
+                $convertImagen= implode(',',$imagen);
+                // print($convertImagen);
+
             ?>
 
                 <?php
@@ -64,8 +79,8 @@ include("../modelo/Doctrine/Entity/Reservas.php");
                     <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $fecha_str ?></h3>
                     <div class="card-body">
                         <p class="card-text presentacion">Comensales: <?php echo $comensales ?></p>
-                        <p class="card-text presentacion">Precio: <i><?php echo $precio ?></i></p>
-                        <a class="btn btn-primary" data-bs-toggle="modal" href="#portfolioModal1" onclick="verReserva('<?php echo $comensales ?>', '<?php echo $precio ?>', '<?php echo $fecha_str ?>')">
+                        <p class="card-text presentacion">Precio: <i><?php echo $precio ?> €</i></p>
+                        <a class="btn btn-primary" data-bs-toggle="modal" href="#portfolioModal1" onclick="verReserva('<?php echo $comensales ?>', '<?php echo $precio ?>', '<?php echo $fecha_str ?>', '<?php echo $convertNombre ?>', '<?php echo $convertTipo ?>', '<?php echo $convertImagen ?>')">
                             Ver
                         </a>
                         <?php
@@ -76,6 +91,7 @@ include("../modelo/Doctrine/Entity/Reservas.php");
                                 echo " <a data-id=\"$id\" class=\"eliminarNoticia btn btn-danger\">Eliminar</a>";
                             }
                         }
+                        // print_r($idPlato);
                         ?>
                     </div>
                 </div>
@@ -101,7 +117,18 @@ include("../modelo/Doctrine/Entity/Reservas.php");
                                                 </li>
                                             </ul>
                                             <h3 class="text-uppercase">Menú</h3>
-                                            
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Tipo</th>
+                                                        <th scope="col">Imagen</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="crear">
+
+                                                </tbody>
+                                            </table>
                                             <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                                 <!-- <i class="fas fa-xmark me-1"></i> -->
                                                 Inscribirse

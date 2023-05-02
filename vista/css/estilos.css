@@ -51,4 +51,15 @@ body{
     text-align: center;
     margin-top: 1%;
 }
+/* imagen de la tabla de ver reservas */
+.imagenTabla{
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* centrar vertical del nombre y tipo de ver reservas */
+.centrar-vertical{
+vertical-align: middle;
+}
 
