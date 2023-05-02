@@ -215,11 +215,9 @@ function validarTelefonoVista() {
     if (expresion.test(telefono)) {
       errortitulo.setAttribute("class", "d-none");
       titulo.setAttribute("class", "form-control");
-      console.log("true");
     } else {
       errortitulo.setAttribute("class", "error");
       titulo.setAttribute("class", "form-control border border-danger");
-      console.log("false");
     }
   });
 }
