@@ -72,3 +72,40 @@ vertical-align: middle;
     white-space: nowrap;
 }
 
+
+.search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+  .search-results li {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 12px;
+    cursor: pointer;
+  }
+  
+  .search-results li:hover {
+    background-color: #ddd;
+  }
+  /* -------------- */
+  /* ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 12px;
+    cursor: pointer;
+  }
+  
+  li:hover {
+    background-color: #ddd;
+  }
+   */
+  

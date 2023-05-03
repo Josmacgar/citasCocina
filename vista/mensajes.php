@@ -39,7 +39,6 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
         <p id="botonAniadir">
             <button type="button" class="btn btn-secondary" id="imagenAniadir" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Redactar</button>
         </p>
-
         <table class="table">
             <thead>
                 <tr>
@@ -87,6 +86,7 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
                             <div class="mb-3">
                                 <label for="destinatario" class="col-form-label">Destinatario:</label>
                                 <input type="text" class="form-control" id="destinatario" name="destinatario">
+                                <div id="resultadoBusqueda"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="asunto" class="col-form-label">Asunto:</label>
@@ -111,7 +111,7 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
     <!-- Bootstrap core JS-->
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
-    <script src="/citascocina/vista/js/verReservas.js"></script>
+    <script src="/citascocina/vista/js/mensajes.js"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
