@@ -5,8 +5,7 @@ include("header.php");
 use Doctrine\Common\Collections\ArrayCollection;
 // require_once dirname(__FILE__, 1) . "citasCocina/modelo/Doctrine/bootstrap.php";
 include("../modelo/Doctrine/bootstrap.php");
-include("../modelo/Doctrine/Entity/Reservas.php");
-include("../modelo/Doctrine/Entity/Platos.php");
+include("../modelo/Doctrine/Entity/Mensajes.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,14 +36,82 @@ include("../modelo/Doctrine/Entity/Platos.php");
 
 <body>
     <div id="contenedor">
-<h1>aa</h1>
+        <p id="botonAniadir">
+            <button type="button" class="btn btn-secondary" id="imagenAniadir" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Redactar</button>
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">De:</th>
+                    <th scope="col">Asunto</th>
+                    <th scope="col">Cuerpo</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <?php
+            //contador que se va incrementando por cada fila 
+            $contador = 1;
+            $datos = $entityManager->getRepository("mensajes")
+                ->findBy(array('destinatario' => $_SESSION['idUsuario']));
+            foreach ($datos as $key) {
+                //formato de fecha
+                $fecha = $key->getFecha();
+                $fecha_str = $fecha->format('d/m/Y');
+            ?>
+                <tbody>
+                    <tr>
+                        <th scope="row"><?php echo $contador ?></th>
+                        <td><?php echo $key->getUsuario()->getEmail() ?></td>
+                        <td><?php echo $key->getAsunto() ?></td>
+                        <td id="cuerpo"><?php echo $key->getCuerpo() ?></td>
+                        <td><?php echo $fecha_str ?></td>
+
+                    </tr>
+                </tbody>
+            <?php
+                $contador += 1;
+            }
+            ?>
+        </table>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Mensaje</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formulario" action="/citascocina/controlador/controladorMensajes.php" method="post">
+                            <div class="mb-3">
+                                <label for="destinatario" class="col-form-label">Destinatario:</label>
+                                <input type="text" class="form-control" id="destinatario" name="destinatario">
+                            </div>
+                            <div class="mb-3">
+                                <label for="asunto" class="col-form-label">Asunto:</label>
+                                <input type="text" class="form-control" id="asunto" name="asunto">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contenido" class="col-form-label">Mensaje:</label>
+                                <textarea class="form-control" id="contenido" name="contenido"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="enviar">Send message</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap core JS-->
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
     <script src="/citascocina/vista/js/verReservas.js"></script>
-    <script src="/citascocina/vista/js/eliminarReservas.js"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

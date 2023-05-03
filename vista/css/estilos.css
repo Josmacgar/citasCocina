@@ -63,3 +63,12 @@ body{
 vertical-align: middle;
 }
 
+/* para controlar el desbordamiento en el cuerpo de mensajes recibibos */
+#cuerpo {
+    width: 300px;
+    max-width: 700px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
