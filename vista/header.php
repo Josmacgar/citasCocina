@@ -54,7 +54,7 @@ session_start();
                     }
                     ?>
                     <li class="nav-item"><a class="nav-link" href="/citascocina/vista/noticias.php">Noticias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/citascocina/vista/mensajes.php">Mensajes</a></li>
                     <?php
                     //se muestra cerrar sesion solo cuando existe una sesion
                     if (isset($_SESSION['email'])) {

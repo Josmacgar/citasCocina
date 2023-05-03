@@ -29,9 +29,6 @@ function verReserva(comensales, precio, date, nombres, tipos, imagenes) {
   let nombre = nombres.split(",");
   let tipo = tipos.split(",");
   let imagen = imagenes.split(",");
-  for (let i = 0; i < nombre.length; i++) {
-    console.log(imagen[i]);
-  }
   // console.log(nombre);
   // console.log(nombre);
   let cuerpoTabla = document.getElementById("crear"); // obtener la tabla donde se agregarán las filas
@@ -70,34 +67,10 @@ function verReserva(comensales, precio, date, nombres, tipos, imagenes) {
     // agregar la fila a la tabla
     cuerpoTabla.appendChild(row);
   }
-
-  //id
-  // let idnombre = document.getElementById("nombrenombre");
-  // let idnombreAnterior = idnombre.firstChild;
-  // if (idnombreAnterior) {
-  //   idnombre.removeChild(idnombreAnterior);
-  // }
-  // idnombre.appendChild(document.createTextNode(nombre));
-
-  //   let idnombre = document.getElementById("nombrenombre");
-  // let idnombreAnterior = idnombre.firstChild;
-  // if (idnombreAnterior) {
-  //   idnombre.removeChild(idnombreAnterior);
-  // }
-  //  console.log(nombre);
-  // let nombres = nombre.split(","); // convierte la cadena en un array
-  // let row = document.createElement("tr");
-
-  // for (let i = 0; i < nombres.length; i++) {
-  //   console.log(nombres[i]);
-  //   let cell = document.createElement("td");
-  //   cell.appendChild(document.createTextNode(nombres[i]));
-  //   row.appendChild(cell);
-  // }
-
-  // idnombre.appendChild(row);
-
-  //   var nombres = JSON.parse(nombre);
-  // console.log(nombres[0]);
-  // console.log(nombres[1]);
 }
+
+// se añade el boton click para que actualice la pagina al cerrar al modal porque se quedaban almacenados
+// los platos y se concatenaban con otras reservas
+document.querySelector('#cerrarModal').addEventListener('click',function () {
+  location.reload();
+})
