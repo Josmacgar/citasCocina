@@ -59,8 +59,8 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
                 $fecha = $key->getFecha();
                 $fecha_str = $fecha->format('d/m/Y');
             ?>
-                <tbody>
-                    <tr>
+                <tbody class="tbodyMensajes">
+                    <tr data-bs-toggle="modal" data-bs-target="#verMensaje" onclick="verMensaje('<?php echo $key->getUsuario()->getEmail() ?>','<?php echo $key->getAsunto() ?>','<?php echo $key->getCuerpo() ?>','<?php echo $fecha_str ?>')">
                         <th scope="row"><?php echo $contador ?></th>
                         <td><?php echo $key->getUsuario()->getEmail() ?></td>
                         <td><?php echo $key->getAsunto() ?></td>
@@ -74,6 +74,39 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
             }
             ?>
         </table>
+
+        <!-- Modal ver mensaje-->
+        <div class="modal fade" id="verMensaje" tabindex="-1" aria-labelledby="verMensaje" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="titulo"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-inline">
+                            <li>
+                                <strong>De:</strong>
+                                <label id="remitente"></label>
+                                <br>
+                                <strong>Fecha:</strong>
+                                <label id="idFecha"></label>
+                            </li>
+                        </ul>
+                        <div class="text-break">
+                        <strong>Contenido:</strong>
+                        <p id="contenido"></p>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal enviar mensaje -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

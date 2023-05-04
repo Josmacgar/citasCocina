@@ -65,14 +65,14 @@ vertical-align: middle;
 
 /* para controlar el desbordamiento en el cuerpo de mensajes recibibos */
 #cuerpo {
-    width: 300px;
+     width: 300px;          
     max-width: 700px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; 
 }
 
-
+/* para la lista de usuarios de enviar mensaje */
 .search-results {
     list-style: none;
     padding: 0;
@@ -89,23 +89,9 @@ vertical-align: middle;
   .search-results li:hover {
     background-color: #ddd;
   }
-  /* -------------- */
-  /* ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  li {
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    margin-top: -1px;
-    padding: 12px;
+
+  /* hover de los tr para de cada mensaje para abrir el modal */
+   
+  .tbodyMensajes tr:hover{
     cursor: pointer;
   }
-  
-  li:hover {
-    background-color: #ddd;
-  }
-   */
-  

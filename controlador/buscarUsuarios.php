@@ -5,16 +5,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 include("../modelo/Doctrine/bootstrap.php");
 include("../modelo/Doctrine/Entity/Usuario.php");
 include("../modelo/Doctrine/Entity/Mensajes.php");
-
+session_start();
 //el siguiente codigo devuelve las listas con las coincidencias de usuarios
 $input = $_POST['input'];
-//esta consulta exclulle al usuario admin@admin.com
+//esta consulta exclulle al usuario admin@admin.com y al mismo usuario de la sesion
 $usuarios = $entityManager->getRepository("usuario")
     ->createQueryBuilder('u')
     ->where('u.email LIKE :input')
     ->andWhere('u.email != :admin_email')
+    ->andWhere('u.email != :mismo_email')
     ->setParameter('input', '%' . $input . '%')
     ->setParameter('admin_email', 'admin@admin.com')
+    ->setParameter('mismo_email', $_SESSION['email'])
     ->getQuery()
     ->getResult();
 
