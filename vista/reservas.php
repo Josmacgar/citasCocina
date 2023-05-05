@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 include("../modelo/Doctrine/bootstrap.php");
 include("../modelo/Doctrine/Entity/Reservas.php");
 include("../modelo/Doctrine/Entity/Platos.php");
+include("../modelo/Doctrine/Entity/Usuario.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,16 +55,16 @@ include("../modelo/Doctrine/Entity/Platos.php");
             foreach ($resultado as $key) {
 
                 $platos = $entityManager->getRepository("platos")
-                ->findPLatos($key->getIdReserva());
+                    ->findPLatos($key->getIdReserva());
                 //obtenemos solo el dato que queremos 
                 $nombrePlato = array_column($platos, 'nombre');
                 $tipoPlato = array_column($platos, 'tipo');
                 $imagen = array_column($platos, 'imagen');
 
                 //convertimos los datos anteriores a cadena de texto
-                $convertNombre= implode(',',$nombrePlato);
-                $convertTipo= implode(',',$tipoPlato);
-                $convertImagen= implode(',',$imagen);
+                $convertNombre = implode(',', $nombrePlato);
+                $convertTipo = implode(',', $tipoPlato);
+                $convertImagen = implode(',', $imagen);
                 // print($convertImagen);
 
             ?>
@@ -80,8 +81,22 @@ include("../modelo/Doctrine/Entity/Platos.php");
                     <div class="card-body">
                         <p class="card-text presentacion">Comensales: <?php echo $comensales ?></p>
                         <p class="card-text presentacion">Precio: <i><?php echo $precio ?> €</i></p>
+
+
                         <a class="btn btn-primary" data-bs-toggle="modal" href="#portfolioModal1" onclick="verReserva('<?php echo $comensales ?>', '<?php echo $precio ?>', '<?php echo $fecha_str ?>', '<?php echo $convertNombre ?>', '<?php echo $convertTipo ?>', '<?php echo $convertImagen ?>')">
                             Ver
+                        </a>
+                        <?php $prueba = findReservaUsuario($_SESSION['idUsuario'], $id, $entityManager);?>
+                        <!-- se comprueba el return de la funcion y se pone un colo u otro -->
+                        <a id="suscripcion" class="btn btn-primary" style="background-color: <?php echo ($prueba == 1) ? 'green' : 'red'; ?>" onclick="suscripcion('<?php echo $id ?>',this)">
+                        <?php
+                        //if para cambiar el contenido el boton dependiendo de la funcion
+                               if ($prueba==1) {
+                                echo "Reservar";
+                               }else {
+                                echo "Anular reserva ";
+                               }
+                            ?>
                         </a>
                         <?php
                         //solo se puede eliminar noticias si es profesor o admin
@@ -129,9 +144,9 @@ include("../modelo/Doctrine/Entity/Platos.php");
 
                                                 </tbody>
                                             </table>
-                                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                                <!-- <i class="fas fa-xmark me-1"></i> -->
-                                                Inscribirse
+                                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button" id="cerrar">
+                                                <i class="fas fa-xmark me-1"></i>
+                                                Cerrar
                                             </button>
                                         </div>
                                     </div>
@@ -142,6 +157,47 @@ include("../modelo/Doctrine/Entity/Platos.php");
                 </div>
             <?php
             }
+            // funcion que devuelve 1 o 0 dependiendo si el usuario esta en la reserva o no
+            function findReservaUsuario($usuario, $reserva, $entityManager)
+            {
+                $resultado = $entityManager->getRepository("usuario")
+                    ->findByReserva($reserva);
+
+
+                //bucle que recorre el array anterior para comprobar si el usuario existe en dicha reserva
+                $usuario = $_SESSION['idUsuario'];
+
+                // Obtener la reserva
+                $reserva = $entityManager->getRepository("Reservas")
+                    ->findOneBy(array('idReserva' => $reserva));
+
+                // Obtener el usuario a editar
+                $usu = $entityManager->getRepository("Usuario")
+                    ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
+
+                // Obtener las reservas del usuario y convertir la colección a un array
+                $reservas = $usu->getReserva()->toArray();
+
+                // Verificar si la reserva ya está asignada al usuario
+                $existe = false;
+                foreach ($resultado as $user) {
+                    if ($user['idUsuario'] == $usuario) {
+                        $existe = true;
+                        break;
+                    }
+                }
+
+
+                if ($existe) {
+                    // echo "El usuario ya tiene asignada esta reserva.";
+                    return 0;
+                } else {
+                    // Asignar la reserva al usuario
+
+                    // echo "La reserva se ha asignado correctamente";
+                    return 1;
+                }
+            }
             ?>
         </div>
     </div>
@@ -151,6 +207,7 @@ include("../modelo/Doctrine/Entity/Platos.php");
     <script src="/citascocina/vista/js/scripts.js"></script>
     <script src="/citascocina/vista/js/verReservas.js"></script>
     <script src="/citascocina/vista/js/eliminarReservas.js"></script>
+    <script src="/citascocina/vista/js/inscribirseReserva.js"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

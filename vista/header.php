@@ -54,7 +54,11 @@ session_start();
                     }
                     ?>
                     <li class="nav-item"><a class="nav-link" href="/citascocina/vista/noticias.php">Noticias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/citascocina/vista/mensajes.php">Mensajes</a></li>
+                    <?php
+                    if (isset($_SESSION['email'])) {
+                        echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/citascocina/vista/mensajes.php\">Mensajes</a></li>";
+                    }
+                    ?>
                     <?php
                     //se muestra cerrar sesion solo cuando existe una sesion
                     if (isset($_SESSION['email'])) {
@@ -79,12 +83,20 @@ session_start();
                                 <?php
                                 //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
                                 if (isset($_SESSION['idUsuario'])) {
-                                    if ($_SESSION['rol']=='admin') {
+                                    if ($_SESSION['rol'] == 'admin') {
                                         echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/listarUsuarios.php\">Usuarios</a></li>";
                                     }
                                 }
                                 ?>
-                                <li><a class="dropdown-item" href="/citascocina/vista/platos.php">Platos</a></li>
+                                <?php
+                                //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
+                                if (isset($_SESSION['idUsuario'])) {
+                                    if ($_SESSION['rol'] == 'admin'||$_SESSION['rol'] == 'profesor') {
+                                        echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/platos.php\">Platos</a></li>";
+                                    }
+                                }
+                                ?>
+
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

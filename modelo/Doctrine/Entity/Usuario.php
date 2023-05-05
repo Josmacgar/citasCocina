@@ -55,7 +55,7 @@ class Usuario {
         @ORM\ManyToMany(targetEntity="Reservas")
         @ORM\JoinTable(name="reservas_cliente",
             joinColumns={@ORM\JoinColumn(name="idUsuario", referencedColumnName="idUsuario")},
-            inverseJoinColumns={@ORM\JoinColumn(name="idReserva", referencedColumnName="idReserva", unique=true)}
+            inverseJoinColumns={@ORM\JoinColumn(name="idReserva", referencedColumnName="idReserva")}
         )
     */
     private $reserva;

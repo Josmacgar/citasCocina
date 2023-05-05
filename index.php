@@ -23,8 +23,8 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Welcome To Our Studio!</div>
-                <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+                <div class="masthead-subheading">Bienvenido</div>
+                <div class="masthead-heading text-uppercase">Reserva, come, disfruta</div>
                 <?php
                     //se muestra login cuando no existe una sesion
                     if (!isset($_SESSION['email'])) {
