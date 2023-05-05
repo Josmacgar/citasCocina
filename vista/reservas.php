@@ -86,18 +86,23 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                         <a class="btn btn-primary" data-bs-toggle="modal" href="#portfolioModal1" onclick="verReserva('<?php echo $comensales ?>', '<?php echo $precio ?>', '<?php echo $fecha_str ?>', '<?php echo $convertNombre ?>', '<?php echo $convertTipo ?>', '<?php echo $convertImagen ?>')">
                             Ver
                         </a>
-                        <?php $prueba = findReservaUsuario($_SESSION['idUsuario'], $id, $entityManager);?>
-                        <!-- se comprueba el return de la funcion y se pone un colo u otro -->
-                        <a id="suscripcion" class="btn btn-primary" style="background-color: <?php echo ($prueba == 1) ? 'green' : 'red'; ?>" onclick="suscripcion('<?php echo $id ?>',this)">
                         <?php
-                        //if para cambiar el contenido el boton dependiendo de la funcion
-                               if ($prueba==1) {
+                        $prueba = findReservaUsuario($_SESSION['idUsuario'], $id, $entityManager);
+                        //filtro para reservar que no sea profesor ni admin
+                        if (($_SESSION['rol'] != 'profesor' && $_SESSION['rol'] != 'admin')) {
+                            //cambiamos el color y el contenido dependiendo del valor que nos traiga $prueba
+                            $bg_color = ($prueba == 1) ? 'green' : 'red';
+                            echo "<a id=\"suscripcion\" class=\"btn btn-primary\" style=\"background-color: $bg_color;\" onclick=\"suscripcion('$id',this)\">";
+                            if ($prueba == 1) {
                                 echo "Reservar";
-                               }else {
+                            } else {
                                 echo "Anular reserva ";
-                               }
-                            ?>
-                        </a>
+                            }
+                            echo "</a>";
+                        }
+                        ?>
+
+
                         <?php
                         //solo se puede eliminar noticias si es profesor o admin
                         if (isset($_SESSION['idUsuario'])) {
