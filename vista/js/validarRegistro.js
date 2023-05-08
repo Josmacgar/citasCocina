@@ -88,71 +88,15 @@ function validarPasswordVista() {
 validarPasswordVista();
 
 // DNI
-// function validarDni() {
-//     let password = document.querySelector('#dni').value;
-//     let expresion =  /^[0-9]{8,8}[A-Z]$/;
-//     if(expresion.test(password)){
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
-// function validarDni() {
-//     let dni = $('#dni').val();
-  
-//     // Realizar petición AJAX con jQuery al controlador de login
-//     $.ajax({
-//       url: '/citascocina/controlador/pruebaAjax.php',
-//       method: 'POST',
-//       data: {
-//         dni: dni,
-//         tipo: 'dni'
-//       },
-//       success: function(respuesta) {
-        // if (!respuesta) {
-        //   // Si el DNI es válido, verificar la expresión regular
-        //   let expresion = /^[0-9]{8,8}[A-Z]$/;
-        //   if (expresion.test(dni)) {
-        //     alert('El DNI es válido y está registrado en el sistema.');
-        //     $('#dni').val(dni);
-        //   } else {
-        //     alert('El DNI es inválido.');
-        //   }
-        // } else {
-//           alert('El DNI no está registrado en el sistema.');
-//         }
-//       },
-//       error: function() {
-//         alert('Ha ocurrido un error al comprobar el DNI.');
-//       }
-//     });
-//   }
 function validarDni() {
-    global=global;
-   let dni= document.querySelector('#dni').value;
-   $.ajax({
-       type:"POST",
-      //  url:"/citascocina/controlador/controladorRegistroNoticia.php", NO ENTIENDO PORQUE VA A NOTICIAS
-      data: {
-        dni: dni,
-        tipo: 'dni'
-      },
-   }).done(function(respuesta){
-    if (respuesta){
-        alert('Existe BD');
-        global= false;
-    }else {
-        let expresion = /^[0-9]{8,8}[A-Z]$/;
-        if (expresion.test(dni)) {
-            global= true;
-        }
-        // alert('Nadaa');
+    let password = document.querySelector('#dni').value;
+    let expresion =  /^[0-9]{8,8}[A-Z]$/;
+    if(expresion.test(password)){
+        return true;
+    } else {
+        return false;
     }
-   });
-  }
-
-  
-  
+}
 
 function validarDnidVista() {
   let titulo = document.querySelector("#dni");
@@ -224,7 +168,7 @@ function validarTelefonoVista() {
 validarTelefonoVista();
 
 //funcion la cual es comprobada por onsubmit que recoge las variables y devuelve true o false
-function validarFormulario() {
+function validarCampos() {
   let nombre = validarNombre();
   let email = validarEmail();
   let contraseña = validarPassword();
@@ -232,12 +176,11 @@ function validarFormulario() {
   let apellidos = validarApellidos();
   let telefono = validarTelefono();
   
-console.log(global);
   if (
     nombre == false ||
-    email == false ||
+    dni==false||
     contraseña == false ||
-    dni == false ||
+   email==false ||
     apellidos == false ||
     telefono == false
   ) {
@@ -245,4 +188,39 @@ console.log(global);
   } else {
     return true;
   }
+}
+
+//se obtiene el formulario y no se envia hasta que los campos esten correctos
+let form =document.getElementById("formulario");
+form.addEventListener('submit', validarFormulario);
+function validarFormulario(evt){
+  //paramos el submit
+  evt.preventDefault();
+ let dni= document.querySelector('#dni').value;
+ let email= document.querySelector('#email').value;
+
+ //se obtiene el dni y el email para luego ser comprobados en la bd de que no exista
+ cadena="dni=" + dni + '&email='+email;
+
+ //peticion ajax que devuelve true o false dependiendo si existe el dni y el email
+ $.ajax({
+     type:"POST",
+     url:"/citascocina/controlador/RegistroUsuarioCompruebaDni_Email.php",
+     data:cadena
+ }).done(function(respuesta){
+  if (respuesta==false){
+
+    if (validarCampos()) {
+      alert('si');
+      form.submit();
+    } else {
+      alert('no');
+    }
+      
+  }else {
+    alert('fallo');
+      document.getElementById('error').innerHTML="El email no existe";
+  }
+ });
+
 }

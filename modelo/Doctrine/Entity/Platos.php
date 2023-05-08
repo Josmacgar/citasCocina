@@ -115,10 +115,30 @@ class Platos {
 
         return $this;
     }
+        /**
+     * Get the value of reserva
+     */ 
+    public function getReserva()
+    {
+        return $this->reserva;
+    }
+
+    /**
+     * Set the value of reserva
+     *
+     * @return  self
+     */ 
+    public function setReserva($reserva)
+    {
+        $this->reserva = $reserva;
+
+        return $this;
+    }
     public function __toString() {
         return "Plato: " . $this->getNombre() . " - "
             . $this->getImagen() . " - "
             . $this->getTipo(). " - ";
     }
+
 }
 

@@ -59,6 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $findUsuario=true;
     }else{
       $findUsuario=false;
+      // header("Location:/citascocina/vista/registroUsuario.php");
     }
     }
 

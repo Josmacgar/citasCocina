@@ -1,5 +1,6 @@
 <?php
 include("../modelo/modeloUsuarios.php");
+
 use Doctrine\Common\Collections\ArrayCollection;
 // require_once dirname(__FILE__, 1) . "citasCocina/modelo/Doctrine/bootstrap.php";
 include("../modelo/Doctrine/bootstrap.php");
@@ -8,36 +9,23 @@ include("../modelo/Doctrine/Entity/Noticias.php");
 
 // require_once dirname(__FILE__, 1) . "modelo/Doctrine/Entity/Usuario.php";
 // C:\xampp\htdocs\citasCocina\modelo\Doctrine\PopulateBD.php
-$findUsuario = true;
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $titulo = $_POST['titulo'];
     $contenido = $_POST['contenido'];
     $date = $_POST['date'];
-    $modo=$_POST['modo'];
-    $idNoticia=$_POST['idNoticia'];
+    $modo = $_POST['modo'];
+    $idNoticia = $_POST['idNoticia'];
 
-    if (isset($_POST['tipo']) && $_POST['tipo'] == 'dni') {
-        function comprobarDni(){
-            $dni = $_POST['dni'];
-            $sqlFindCorreo = "SELECT * FROM usuario where dni = '$dni'";
-            $result = $GLOBALS["bd"]->query($sqlFindCorreo);
-            $res = true;
-            if ($result->rowCount() == 0) {
-                $res = false;
-            }
-            echo $res;
-            return $res;
-        }
-        echo comprobarDni();
-    }elseif ($modo=='editar'){
+    if ($modo == 'editar') {
         session_start();
-        $noticiaEditar= new Noticias();
+        $noticiaEditar = new Noticias();
         $noticiaEditar = $entityManager->getRepository("noticias")->findOneBy(array('idNoticia' => $idNoticia));
 
-        $usuario=new Usuario();
+        $usuario = new Usuario();
         $usuario = $entityManager->getRepository("usuario")
-        ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
+            ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
         $noticiaEditar->setUsuario($usuario);
         $noticiaEditar->setTitulo($titulo);
         $noticiaEditar->setCuerpo($contenido);
@@ -46,12 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $entityManager->persist($noticiaEditar);
         $entityManager->flush();
         header("Location:/citascocina/vista/noticias.php");
-    }else{    
+    } else {
         session_start();
         $noticia = new Noticias();
-        $usuario=new Usuario();
+        $usuario = new Usuario();
         $usuario = $entityManager->getRepository("usuario")
-        ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
+            ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
         $noticia->setUsuario($usuario);
         $noticia->setTitulo($titulo);
         $noticia->setCuerpo($contenido);
@@ -61,5 +49,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $entityManager->flush();
         header("Location:/citascocina/vista/noticias.php");
     }
-
 }

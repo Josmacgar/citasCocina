@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 <body>
   <main class="form-signin w-100 m-auto">
-    <form action="../controlador/controladorRegistroUsuario.php" method="POST" onsubmit="return validarFormulario()">
+    <form action="../controlador/controladorRegistroUsuario.php" method="POST" id="formulario">
       <div id="logoSesion">
         <img class="mb-4" src="/citascocina/vista/img/registrarse.png" alt="" width="72" height="57">
       </div>
