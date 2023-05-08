@@ -191,33 +191,44 @@ function validarCampos() {
 //se obtiene el formulario y no se envia hasta que los campos esten correctos
 let form =document.getElementById("formulario");
 form.addEventListener('submit', validarFormulario);
+
 function validarFormulario(evt){
   //paramos el submit
   evt.preventDefault();
  let dni= document.querySelector('#dni').value;
  let email= document.querySelector('#email').value;
-
+let modo = document.querySelector('#modo').value;
  //se obtiene el dni y el email para luego ser comprobados en la bd de que no exista
  cadena="dni=" + dni + '&email='+email;
-
  //peticion ajax que devuelve true o false dependiendo si existe el dni y el email
  $.ajax({
      type:"POST",
      url:"/citascocina/controlador/RegistroUsuarioCompruebaDni_Email.php",
      data:cadena
  }).done(function(respuesta){
-  if (respuesta==false){
-    $('#errorDniEmail').attr("class", "d-none");
-    if (validarCampos()) {
+
+  //if para que no compare el dni ni el email a la hora de editar
+  if (!modo=='editar') {
+    if (respuesta==false){
       $('#errorDniEmail').attr("class", "d-none");
-      form.submit();
-    } else {
+      if (validarCampos()) {
+        $('#errorDniEmail').attr("class", "d-none");
+        form.submit();
+      } else {
+        $('#errorDniEmail').attr("class", "form-control");
+      }
+        
+    }else {
       $('#errorDniEmail').attr("class", "form-control");
     }
-      
-  }else {
-    $('#errorDniEmail').attr("class", "form-control");
+  }else{
+    //if para que cuando entre en el modo editar solo valide los campos
+    if (validarCampos()) {
+      form.submit();
+    }
+    
   }
+
  });
 
 }
