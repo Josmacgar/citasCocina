@@ -48,11 +48,9 @@ function validarEmailVista() {
     if (expresion.test(email)) {
       errortitulo.setAttribute("class", "d-none");
       titulo.setAttribute("class", "form-control");
-      console.log("true");
     } else {
       errortitulo.setAttribute("class", "error");
       titulo.setAttribute("class", "form-control border border-danger");
-      console.log("false");
     }
   });
 }
@@ -209,17 +207,16 @@ function validarFormulario(evt){
      data:cadena
  }).done(function(respuesta){
   if (respuesta==false){
-
+    $('#errorDniEmail').attr("class", "d-none");
     if (validarCampos()) {
-      alert('si');
+      $('#errorDniEmail').attr("class", "d-none");
       form.submit();
     } else {
-      alert('no');
+      $('#errorDniEmail').attr("class", "form-control");
     }
       
   }else {
-    alert('fallo');
-      document.getElementById('error').innerHTML="El email no existe";
+    $('#errorDniEmail').attr("class", "form-control");
   }
  });
 

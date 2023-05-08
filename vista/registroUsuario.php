@@ -53,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         <label for="dni">Dni</label>
       </div>
       <section id="errorDni" class="d-none">Formato de DNI incorrecto</section>
-      <section id="dniExiste" class="d-none">El DNI ya existe</section>
       <div class="form-floating">
         <input type="text" class="form-control" id="nombre" placeholder="name@example.com" name="nombre" value="<?php if (isset($modo)) echo ($datos->getNombre()); ?>">
         <label for="nombre">Nombre</label>
@@ -101,11 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
       }
       ?>
     </form>
-    <?php
-    if ($findUsuario == false) {
-      echo "<p>Usuario existente</p>";
-    }
-    ?>
+      <p id="errorDniEmail" class="d-none">Email o dni existentes</p>
   </main>
   <script src="/citascocina/vista/js/validarRegistro.js"></script>
   <script src="/citascocina/vista/js/validarLogin.js"></script>
