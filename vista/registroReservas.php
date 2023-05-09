@@ -48,14 +48,14 @@ $platosAll = $entityManager->getRepository("platos")
 
 <body>
   <main class="form-signin w-100 m-auto">
-    <form action="../controlador/controladorRegistroReservas.php" method="POST" id="formulario" onsubmit="return validarFormulario()">
+    <!-- <form action="../controlador/controladorRegistroReservas.php" method="POST" id="formulario" onsubmit="return validarFormulario()"> -->
       <div id="logoSesion">
         <img class="mb-4" src="/citascocina/vista/img/noticia.png" alt="" width="72" height="57">
       </div>
 
       <h1 class="h3 mb-3 fw-normal"><?php echo isset($modo) ? 'Editar' : 'Registrar Reserva'; ?></h1>
-      <input hidden type="text" name="modo" value="<?php if (isset($modo)) echo ($modo); ?>">
-      <input hidden type="text" name="idReserva" value="<?php if (isset($idReserva)) echo ($idReserva); ?>">
+      <input hidden type="text" id="modo" name="modo" value="<?php if (isset($modo)) echo ($modo); ?>">
+      <input hidden type="text" id="idReserva" name="idReserva" value="<?php if (isset($idReserva)) echo ($idReserva); ?>">
 
       <div class="form-floating">
         <input type="number" class="form-control" id="comensales" placeholder="20" name="comensales" value="<?php if (isset($modo)) echo ($datos->getTitulo()); ?>">
@@ -94,8 +94,8 @@ $platosAll = $entityManager->getRepository("platos")
       </div>
       <div id="listaPlatos"></div>
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit"><?php echo isset($modo) ? 'Editar' : 'Crear'; ?></button>
-    </form>
+      <button class="w-100 btn btn-lg btn-primary" id="enviar" ><?php echo isset($modo) ? 'Editar' : 'Crear'; ?></button>
+    <!-- </form> -->
 
   </main>
   <script src="/citascocina/vista/js/validarReserva.js"></script>

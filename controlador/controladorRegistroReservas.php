@@ -11,75 +11,35 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idReserva = $_POST['idReserva'];
     $modo=$_POST['modo'];
-    $fecha=$_POST['date'];
+    $fecha=$_POST['fecha'];
     $comensales=$_POST['comensales'];
     $precio=$_POST['precio'];
+    $platos=$_POST['platos'];
 
     if ($modo=='editar') {
         
     }else{
         $reserva = new Reservas();
-        $reserva->setFecha($fecha);
+        $date = new DateTime($fecha);
+        $reserva->setFecha($date);
         $reserva->setComensales($comensales);
         $reserva->setPrecio($precio);
-
+        $separarPlatos = explode(",", $platos);
         $entityManager->persist($reserva);
         $entityManager->flush();
-        header("Location:/citascocina/vista/reservas.php");
-    }
-}
-
-//consulta que devuelve los platos que hay en dicha reserva
-$resultado = $entityManager->getRepository("platos")
-    ->findPLatos($reserva);
-
-
-// Obtener la reserva
-$reserva = $entityManager->getRepository("Reservas")
-    ->findOneBy(array('idReserva' => $reserva));
-
-
-// Obtener las reservas del usuario y convertir la colección a un array
-$reservas = $usu->getReserva()->toArray();
-
-// Verificar si la reserva ya está asignada al usuario
-$existe = false;
-foreach ($resultado as $user) {
-    if ($user['idUsuario'] == $usuario) {
-        $existe = true;
-        break;
-    }
-}
-
-
-if ($existe) {
-    // Eliminar la reserva del usuario
-    foreach ($reservas as $key => $value) {
-        if ($value->getIdReserva() == $reserva->getIdReserva()) {
-            unset($reservas[$key]);
-            break;
+        foreach ($separarPlatos as $key) {
+            $reservaActual = $entityManager->getRepository("reservas")->findOneBy(array('idReserva' => $reserva->getIdReserva()));
+            $plato = $entityManager->getRepository("platos")->findOneBy(array('idPlato' => intval($key)));
+            $reservas[] = $reservaActual;
+            $plato->setReserva(new ArrayCollection($reservas));
+            $entityManager->persist($plato);
         }
+        $entityManager->flush();
+        header("Location:/citascocina/vista/platos.php");
     }
-    $usu->setReserva(new ArrayCollection($reservas));
-
-    // Persistir el usuario editado
-    $entityManager->persist($usu);
-    $entityManager->flush();
-
-    // echo "La reserva se ha eliminado correctamente";
-    echo 1;
-} else {
-    // Asignar la reserva al usuario
-    $reservas[] = $reserva;
-    $usu->setReserva(new ArrayCollection($reservas));
-
-    // Persistir el usuario editado
-    $entityManager->persist($usu);
-    $entityManager->flush();
-
-    // echo "La reserva se ha asignado correctamente";
-    echo 0;
 }
+
+
 
 
 

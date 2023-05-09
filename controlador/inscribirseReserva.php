@@ -17,14 +17,14 @@ $resultado = $entityManager->getRepository("usuario")
     ->findByReserva($reserva);
 
 
-//bucle que recorre el array anterior para comprobar si el usuario existe en dicha reserva
+//obtenemos el usuario
 $usuario = $_SESSION['idUsuario'];
 
 // Obtener la reserva
 $reserva = $entityManager->getRepository("Reservas")
     ->findOneBy(array('idReserva' => $reserva));
 
-// Obtener el usuario a editar
+
 $usu = $entityManager->getRepository("Usuario")
     ->findOneBy(array('idUsuario' => $_SESSION['idUsuario']));
 
