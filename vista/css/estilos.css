@@ -95,3 +95,10 @@ vertical-align: middle;
   .tbodyMensajes tr:hover{
     cursor: pointer;
   }
+
+  #selectPlatos{
+    width: 80% !important;
+  }
+  #botonMas{
+   margin-left: 3% !important;
+  }

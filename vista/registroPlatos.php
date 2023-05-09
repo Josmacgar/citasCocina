@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <option value="2">2º Plato</option>
             <option value="postre">Postre</option>
         </select>
-        <label for="tipo">Fecha</label>
+        <label for="tipo">Tipo</label>
       </div>
 
       <button class="w-100 btn btn-lg btn-primary" type="submit"><?php echo isset($modo) ? 'Editar' : 'Crear'; ?></button>
