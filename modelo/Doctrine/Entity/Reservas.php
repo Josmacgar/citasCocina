@@ -13,7 +13,7 @@ class Reservas {
     */
     private $idReserva;
     /**
-        @ORM\Column(type="date")
+        @ORM\Column(type="datetime")
     */
     private $fecha;
     /**
@@ -69,6 +69,7 @@ class Reservas {
 
         return $this;
     }
+
 
     /**
      * Get the value of precio

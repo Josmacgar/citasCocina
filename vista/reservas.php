@@ -74,7 +74,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                 $comensales = $key->getComensales();
                 $precio = $key->getPrecio();
                 $fecha = $key->getFecha();
-                $fecha_str = $fecha->format('d/m/Y');
+                $fecha_str = $fecha->format('d/m/Y - H:i');
                 ?>
                 <div class="card ajustar">
                     <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $fecha_str ?></h3>

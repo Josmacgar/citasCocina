@@ -69,7 +69,7 @@ $platosAll = $entityManager->getRepository("platos")
       </div>
       <section id="errorPrecio" class="d-none">Formato de precio incorrecto</section>
       <div class="form-floating">
-        <input type="date" class="form-control" id="date" placeholder="Fecha" name="date">
+        <input type="datetime-local" class="form-control" id="date" placeholder="Fecha" name="date">
         <label for="fecha">Fecha</label>
       </div>
       <section id="errorDate" class="d-none">Formato de fecha incorrecto</section>
