@@ -50,7 +50,7 @@ $platosAll = $entityManager->getRepository("platos")
   <main class="form-signin w-100 m-auto">
     <!-- <form action="../controlador/controladorRegistroReservas.php" method="POST" id="formulario" onsubmit="return validarFormulario()"> -->
       <div id="logoSesion">
-        <img class="mb-4" src="/citascocina/vista/img/noticia.png" alt="" width="72" height="57">
+        <img class="mb-4" src="/citascocina/vista/img/reservas.svg" alt="" width="150" height="90">
       </div>
 
       <h1 class="h3 mb-3 fw-normal"><?php echo isset($modo) ? 'Editar' : 'Registrar Reserva'; ?></h1>
@@ -61,14 +61,13 @@ $platosAll = $entityManager->getRepository("platos")
         <input type="number" class="form-control" id="comensales" placeholder="20" name="comensales" value="<?php if (isset($modo)) echo ($datos->getTitulo()); ?>">
         <label for="comensales">Comensales</label>
       </div>
-      <section id="errorComensales" class="d-none">Formato de Titulo incorrecto</section>
+      <section id="errorComensales" class="d-none">Formato de numero incorrecto</section>
       <div class="form-floating">
-        <!-- <input type="text" class="form-control" id="nombre" placeholder="name@example.com" name="nombre"> -->
 
-        <textarea class="form-control" name="precio" id="precio" cols="30" rows="10" placeholder="15"><?php if (isset($modo)) echo ($datos->getCuerpo()); ?></textarea>
+      <input type="number" class="form-control" id="precio" placeholder="20" name="precio" value="<?php if (isset($modo)) echo ($datos->getCuerpo()); ?>">
         <label for="precio">Precio</label>
       </div>
-      <section id="errorPrecio" class="d-none">Formato de Contenido incorrecto</section>
+      <section id="errorPrecio" class="d-none">Formato de precio incorrecto</section>
       <div class="form-floating">
         <input type="date" class="form-control" id="date" placeholder="Fecha" name="date">
         <label for="fecha">Fecha</label>

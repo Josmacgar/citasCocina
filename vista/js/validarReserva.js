@@ -40,6 +40,7 @@ document.getElementById("enviar").addEventListener("click", function () {
       if (respuesta) {
         //enviamos el submit
         alert('Correcto');
+        window.location.href ="../vista/reservas.php";
       } else {
         alert('Fallido');
       }
@@ -53,8 +54,8 @@ const listaPlatos = document.getElementById("listaPlatos");
 // Crear una matriz para almacenar los platos seleccionados
 const platosSeleccionados = [];
 
-document.querySelector("#botonMas").addEventListener("click", prueba);
-function prueba() {
+document.querySelector("#botonMas").addEventListener("click", añadirPlato);
+function añadirPlato() {
   // Obtener el valor y el texto del option seleccionado
   const selectedOption = selectPlatos.options[selectPlatos.selectedIndex];
   const selectedValue = selectedOption.value;
@@ -95,7 +96,7 @@ function prueba() {
 //funcion que valida la condicion del titulo
 function validarComensales() {
   let comensales = document.querySelector("#comensales").value;
-  let expresion = /^[0-9,$]*$/;
+  let expresion = /^\d{1,4}$/;
   if (expresion.test(comensales)) {
     return true;
   } else {
@@ -109,53 +110,55 @@ function validarComensalesVista() {
   let errortitulo = document.querySelector("#errorComensales");
   titulo.addEventListener("keyup", function () {
     let nombre = titulo.value;
-    let expresion = /[0-9]/;
+    let expresion = /^\d{1,4}$/;
     if (expresion.test(nombre)) {
-      errortitulo.setAttribute("class", "error");
-      titulo.setAttribute("class", "form-control border  border-danger");
-    } else {
       errortitulo.setAttribute("class", "d-none");
       titulo.setAttribute("class", "form-control");
+    } else {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border  border-danger");
     }
   });
 }
 validarComensalesVista();
 
 //funcion que valida la condicion del cuerpo
-function validarCuerpo() {
-  let titulo = document.querySelector("#contenido").value;
-  if (titulo.length < 5) {
-    return false;
-  } else {
+function validarPrecio() {
+  let precio = document.querySelector("#precio").value;
+  let expresion = /^\d{1,3}(\,\d{3})*(\.\d+)?$/;
+  if (expresion.test(precio)) {
     return true;
+  } else {
+    return false;
   }
 }
 
+
 //funcion que muestra error en cuerpo
-function validarCuerpoVista() {
-  let titulo = document.querySelector("#contenido");
-  let errortitulo = document.querySelector("#errorContenido");
+function validarPrecioVista() {
+  let titulo = document.querySelector("#precio");
+  let errortitulo = document.querySelector("#errorPrecio");
   titulo.addEventListener("keyup", function () {
     let nombre = titulo.value;
-    if (nombre.length < 3) {
-      errortitulo.setAttribute("class", "error");
-      titulo.setAttribute("class", "form-control border  border-danger");
-    } else {
+    let expresion = /^\d{1,3}(\,\d{3})*(\.\d+)?$/;
+    if (expresion.test(nombre)) {
       errortitulo.setAttribute("class", "d-none");
       titulo.setAttribute("class", "form-control");
+    } else {
+      errortitulo.setAttribute("class", "error");
+      titulo.setAttribute("class", "form-control border  border-danger");
     }
   });
 }
-validarCuerpoVista();
+validarPrecioVista();
 
 //funcion la cual es comprobada por onsubmit que recoge las variables y devuelve true o false
 function validarFormulario() {
-  //   let titulo = validarComensales();
-  //   let cuerpo = validarCuerpo();
-  //   if (titulo == false || cuerpo == false) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  return true;
+    let titulo = validarComensales();
+    let cuerpo = validarPrecio();
+    if (titulo == false || cuerpo == false) {
+      return false;
+    } else {
+      return true;
+    }
 }
