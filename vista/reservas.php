@@ -108,7 +108,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                         if (isset($_SESSION['idUsuario'])) {
                             if ($_SESSION['rol'] == 'profesor' || $_SESSION['rol'] == 'admin') {
                                 echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idNoticia=$id\">Editar</a>";
-                                echo " <a data-id=\"$id\" class=\"eliminarNoticia btn btn-danger\">Eliminar</a>";
+                                echo " <a data-id=\"$id\" class=\"eliminarReserva btn btn-danger\">Eliminar</a>";
                             }
                         }
                         // print_r($idPlato);
@@ -211,7 +211,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
     <!-- Core theme JS-->
     <script src="/citascocina/vista/js/scripts.js"></script>
     <script src="/citascocina/vista/js/verReservas.js"></script>
-    <script src="/citascocina/vista/js/eliminarReservas.js"></script>
+    <script src="/citascocina/vista/js/eliminarReserva.js"></script>
     <script src="/citascocina/vista/js/inscribirseReserva.js"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->
