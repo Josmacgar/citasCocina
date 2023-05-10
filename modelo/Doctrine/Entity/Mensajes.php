@@ -30,7 +30,7 @@ class Mensajes {
     private $destinatario;
     /**
         @ORM\ManyToOne(targetEntity="Usuario")
-        @ORM\JoinColumn(name="usuario",referencedColumnName="idUsuario")
+        @ORM\JoinColumn(name="usuario",referencedColumnName="idUsuario", onDelete="CASCADE")
     */
     private $usuario;
     

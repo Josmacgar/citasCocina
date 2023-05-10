@@ -47,7 +47,7 @@ function validarCuerpoVista() {
     let errortitulo = document.querySelector('#errorContenido');
     titulo.addEventListener("keyup", function () {
         let nombre = titulo.value;
-        if(nombre.length<3){
+        if(nombre.length<5){
             errortitulo.setAttribute("class","error");
             titulo.setAttribute("class","form-control border  border-danger");
 

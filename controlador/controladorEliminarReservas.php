@@ -14,14 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id=$_POST['idReserva'];
     $reserva = $entityManager->getRepository("reservas")
     ->findOneBy(array('idReserva' => $id));
-
-       // Eliminar los platos asociados a la reserva
-       $plato = $entityManager->getRepository("platos")
-       ->findOneBy(array('idPlato' => $id));
-       foreach ($platos as $plato) {
-           $entityManager->remove($plato);
-       }
-
+    
     $entityManager->remove($reserva);
 
     $entityManager->flush();
