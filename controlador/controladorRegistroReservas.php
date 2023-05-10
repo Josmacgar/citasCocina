@@ -17,6 +17,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $platos = $_POST['platos'];
 
     if ($modo == 'editar') {
+        $reservaEditar= new Reservas();
+        $reservaEditar = $entityManager->getRepository("reservas")->findOneBy(array('idReserva' => $idReserva));
+
+        $reservaEditar->setComensales($comensales);
+        $reservaEditar->setPrecio($precio);
+        $date = new DateTime($fecha);
+        $reservaEditar->setFecha($date);
+        
+        $entityManager->persist($reservaEditar);
+        $entityManager->flush();
+        header("Location:/citascocina/vista/platos.php");
     } else {
         //creamos la reserva
         $reserva = new Reservas();

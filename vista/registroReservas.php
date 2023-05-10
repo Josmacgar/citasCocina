@@ -58,13 +58,13 @@ $platosAll = $entityManager->getRepository("platos")
       <input hidden type="text" id="idReserva" name="idReserva" value="<?php if (isset($idReserva)) echo ($idReserva); ?>">
 
       <div class="form-floating">
-        <input type="number" class="form-control" id="comensales" placeholder="20" name="comensales" value="<?php if (isset($modo)) echo ($datos->getTitulo()); ?>">
+        <input type="number" class="form-control" id="comensales" placeholder="20" name="comensales" value="<?php if (isset($modo)) echo ($datos->getComensales()); ?>">
         <label for="comensales">Comensales</label>
       </div>
       <section id="errorComensales" class="d-none">Formato de numero incorrecto</section>
       <div class="form-floating">
 
-      <input type="number" class="form-control" id="precio" placeholder="20" name="precio" value="<?php if (isset($modo)) echo ($datos->getCuerpo()); ?>">
+      <input type="number" class="form-control" id="precio" placeholder="20" name="precio" value="<?php if (isset($modo)) echo ($datos->getPrecio()); ?>">
         <label for="precio">Precio</label>
       </div>
       <section id="errorPrecio" class="d-none">Formato de precio incorrecto</section>

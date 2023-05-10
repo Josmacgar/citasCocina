@@ -107,7 +107,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                         //solo se puede eliminar noticias si es profesor o admin
                         if (isset($_SESSION['idUsuario'])) {
                             if ($_SESSION['rol'] == 'profesor' || $_SESSION['rol'] == 'admin') {
-                                echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroNoticias.php?modo=editar&idNoticia=$id\">Editar</a>";
+                                echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroReservas.php?modo=editar&idReserva=$id\">Editar</a>";
                                 echo " <a data-id=\"$id\" class=\"eliminarReserva btn btn-danger\">Eliminar</a>";
                             }
                         }

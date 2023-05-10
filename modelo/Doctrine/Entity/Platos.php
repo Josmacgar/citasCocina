@@ -28,7 +28,7 @@ class Platos {
         @ORM\ManyToMany(targetEntity="Reservas")
         @ORM\JoinTable(name="reservas_platos",
             joinColumns={@ORM\JoinColumn(name="idPlato", referencedColumnName="idPlato")},
-            inverseJoinColumns={@ORM\JoinColumn(name="idReserva", referencedColumnName="idReserva")}
+            inverseJoinColumns={@ORM\JoinColumn(name="idReserva", referencedColumnName="idReserva", onDelete="CASCADE")}
         )
     */
     private $reserva;
