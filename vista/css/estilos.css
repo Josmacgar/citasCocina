@@ -12,6 +12,15 @@ body{
     margin: 0.5% 0.5% 0.5% 0.5%;
     min-height: 300px;
 }
+/* tamaño del card de reservas */
+.tamanio_reservas {
+    width: 26rem;
+    min-height: 240px;
+  }
+  /* tamaño del card de noticias */
+  .tamanio_noticias {
+    min-height: 270px;
+  }
 .presentacion{
     /* width: 230px;
     white-space: nowrap;

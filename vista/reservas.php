@@ -33,7 +33,6 @@ include("../modelo/Doctrine/Entity/Usuario.php");
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="/citascocina/vista/js/alertify/css/alertify.css">
     <script src="/citascocina/vista/js/alertify/alertify.js"></script>
-
 </head>
 
 <body>
@@ -76,7 +75,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                 $fecha = $key->getFecha();
                 $fecha_str = $fecha->format('d/m/Y - H:i');
                 ?>
-                <div class="card ajustar">
+                <div class="card ajustar tamanio_reservas">
                     <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $fecha_str ?></h3>
                     <div class="card-body">
                         <p class="card-text presentacion">Comensales: <?php echo $comensales ?></p>

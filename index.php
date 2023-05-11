@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="vista/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="vista/css/login.css">
     </head>
     <body id="page-top">
     <?php
@@ -68,9 +69,8 @@
                 </div>
             </div>
         </section>
-        <section class="form-signin w-100 m-auto">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.606969538151!2d-5.418989124205625!3d37.32813657210132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd12983dde205f0d%3A0x4557140b16ff5a52!2sC.%20San%20Pedro%2C%2016%2C%2041620%20Marchena%2C%20Sevilla!5e0!3m2!1ses!2ses!4v1683722290243!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </section>
+        <section class="form-signin w-100 m-auto d-flex justify-content-center">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.606969538151!2d-5.418989124205625!3d37.32813657210132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd12983dde205f0d%3A0x4557140b16ff5a52!2sC.%20San%20Pedro%2C%2016%2C%2041620%20Marchena%2C%20Sevilla!5e0!3m2!1ses!2ses!4v1683823411320!5m2!1ses!2ses" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        </section>
         <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">

@@ -60,7 +60,7 @@ include("../modelo/Doctrine/Entity/Noticias.php");
                 $fecha = $key->getFecha();
                 $fecha_str = $fecha->format('d/m/Y');
                 ?>
-                <div class="card ajustar">
+                <div class="card ajustar tamanio_noticias">
                     <h3 class="card-img-top" style="margin-left: 2%;"><?php echo $key->getTitulo() ?></h3>
                     <div class="card-body">
                         <p class="card-text presentacion"><?php echo $key->getCuerpo() ?></p>

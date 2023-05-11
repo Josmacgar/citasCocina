@@ -43,7 +43,7 @@ $fecha_str = $fecha->format('d/m/Y');
                     <div class="card mb-3" style="border-radius: .5rem;">
                         <div class="row g-0">
                             <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                                <img src="" alt="" class="img-fluid my-5" style="width: 80px;" />
                                 <h5><?php echo  $datos->getNombre(); ?></h5>
                                 <a style="color:white" href="/citascocina/vista/registroUsuario.php?modo=editar"><i class="far fa-edit mb-5"></i></a>
 
