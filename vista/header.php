@@ -59,57 +59,64 @@ session_start();
                         echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/citascocina/vista/mensajes.php\">Mensajes</a></li>";
                     }
                     ?>
+                    <?php
+                    if (isset($_SESSION['email'])) {
 
-                    <li class="nav-item">
-                        <div class="btn-group">
-                            <button type="button" class="btn  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <label for="" class="imgr"><i class="bi bi-gear text-white"></i></label>
-                            
-                            </button>
-                            <ul class="dropdown-menu text-small">
-                                <?php
-                                //se muestra el nombre y perfil cuando exista una sesion
-                                if (isset($_SESSION['email'])) {
-                                    $nombre = $_SESSION["nombre"];
-                                    echo "<li><a class=\"dropdown-item\" >$nombre</a></li>";
-                                    echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/editarPerfil.php\">Perfil</a></li>";
-                                    //if para mostrar mis reservas solo si es cliente
-                                    if ($_SESSION['rol']!='admin') {
-                                        echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/misReservas.php\">Mis reservas</a></li>";
-                                    }
-                                }
-                                ?>
 
-                                <?php
-                                //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
-                                if (isset($_SESSION['idUsuario'])) {
-                                    if ($_SESSION['rol'] == 'admin') {
-                                        echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/listarUsuarios.php\">Usuarios</a></li>";
-                                    }
-                                }
-                                ?>
-                                <?php
-                                //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
-                                if (isset($_SESSION['idUsuario'])) {
-                                    if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'profesor') {
-                                        echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/platos.php\">Platos</a></li>";
-                                    }
-                                }
-                                ?>
+                    ?>
+                        <li class="nav-item">
+                            <div class="btn-group">
+                                <button type="button" class="btn  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <label for="" class="imgr"><i class="bi bi-gear text-white"></i></label>
 
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <?php
-                                //se muestra cerrar sesion solo cuando existe una sesion
-                                if (isset($_SESSION['email'])) {
-                                    echo "<li class=\"nav-item\"><a class=\"dropdown-item\" href=\"/citascocina/controlador/cerrarSesion.php\">Cerrar Sesion</a></li>";
-                                }
-                                ?>
-                                <!-- <li><a class="" href="#">nose</a></li> -->
-                            </ul>
-                        </div>
-                    </li>
+                                </button>
+                                <ul class="dropdown-menu text-small">
+                                    <?php
+                                    //se muestra el nombre y perfil cuando exista una sesion
+                                    if (isset($_SESSION['email'])) {
+                                        $nombre = $_SESSION["nombre"];
+                                        echo "<li><a class=\"dropdown-item\" >$nombre</a></li>";
+                                        echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/editarPerfil.php\">Perfil</a></li>";
+                                        //if para mostrar mis reservas solo si es cliente
+                                        if ($_SESSION['rol'] != 'admin') {
+                                            echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/misReservas.php\">Mis reservas</a></li>";
+                                        }
+                                    }
+                                    ?>
+
+                                    <?php
+                                    //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
+                                    if (isset($_SESSION['idUsuario'])) {
+                                        if ($_SESSION['rol'] == 'admin') {
+                                            echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/listarUsuarios.php\">Usuarios</a></li>";
+                                        }
+                                    }
+                                    ?>
+                                    <?php
+                                    //if que muestra el icono listar usuario solo cuando el usuario de la sesion es profesor o admin
+                                    if (isset($_SESSION['idUsuario'])) {
+                                        if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'profesor') {
+                                            echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/platos.php\">Platos</a></li>";
+                                        }
+                                    }
+                                    ?>
+
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <?php
+                                    //se muestra cerrar sesion solo cuando existe una sesion
+                                    if (isset($_SESSION['email'])) {
+                                        echo "<li class=\"nav-item\"><a class=\"dropdown-item\" href=\"/citascocina/controlador/cerrarSesion.php\">Cerrar Sesion</a></li>";
+                                    }
+                                    ?>
+                                    <!-- <li><a class="" href="#">nose</a></li> -->
+                                </ul>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
