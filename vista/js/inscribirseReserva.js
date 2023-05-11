@@ -1,6 +1,6 @@
-function suscripcion(reserva, elemento) {
-    cadena = "reserva=" + reserva;
-    $.ajax({
+function suscripcion(reserva, elemento,comensales) {
+  cadena = "reserva=" + reserva + "&comensales=" + comensales;
+  $.ajax({
       type: "POST",
       url: "/citascocina/controlador/inscribirseReserva.php",
       data: cadena
@@ -8,8 +8,10 @@ function suscripcion(reserva, elemento) {
       if (respuesta) {
         if (respuesta == 1) {
           elemento.style.backgroundColor = 'green';
-        } else {
-            alertify.success('Reservado');
+        } else if(respuesta==2) {
+          alert('No quedan platos en la reserva');
+        }else{
+          alertify.success('Reservado');
           elemento.style.backgroundColor = 'red';
         }
 

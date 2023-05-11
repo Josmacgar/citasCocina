@@ -92,7 +92,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                         if (($_SESSION['rol'] != 'profesor' && $_SESSION['rol'] != 'admin')) {
                             //cambiamos el color y el contenido dependiendo del valor que nos traiga $prueba
                             $bg_color = ($prueba == 1) ? 'green' : 'red';
-                            echo "<a id=\"suscripcion\" class=\"btn btn-primary\" style=\"background-color: $bg_color;\" onclick=\"suscripcion('$id',this)\">";
+                            echo "<a id=\"suscripcion\" class=\"btn btn-primary\" style=\"background-color: $bg_color;\" onclick=\"suscripcion('$id',this,$comensales)\">";
                             if ($prueba == 1) {
                                 echo "Reservar";
                             } else {
