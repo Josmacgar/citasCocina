@@ -38,18 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date = new DateTime($fecha);
         $reservaEditar->setFecha($date);
 
-        $separarPlatos = explode(",", $platos);
-        foreach ($separarPlatos as $key) {
-            $plato = $entityManager->getRepository("platos")->findOneBy(array('idPlato' => intval($key)));
-            $reservas[] = $reservaEditar;
-            $plato->setReserva(new ArrayCollection($reservas));
-            $entityManager->persist($plato);
+    
+        if (!empty($platos)) {
+            $separarPlatos = explode(",", $platos);
+            foreach ($separarPlatos as $key) {
+                $plato = $entityManager->getRepository("platos")->findOneBy(array('idPlato' => intval($key)));
+                $reservas[] = $reservaEditar;
+                $plato->setReserva(new ArrayCollection($reservas));
+                $entityManager->persist($plato);
+            }
         }
 
         $entityManager->persist($reservaEditar);
         $entityManager->flush();
         header("Location:/citascocina/vista/platos.php");
-
     } else {
         //creamos la reserva
         $reserva = new Reservas();

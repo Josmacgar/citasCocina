@@ -43,30 +43,29 @@ foreach ($resultado as $user) {
 
 
 //if para comprobar si existen platos en la reserva, si no existen envia un 2 y no hace nada 
-if ($comensales - 1 < 0) {
+if ($existe) {
 
-    echo 2;
-} else {
-    //si la reserva existe elimina el usuario de la reserva
-    if ($existe) {
-        // Eliminar la reserva del usuario
-        foreach ($reservas as $key => $value) {
-            if ($value->getIdReserva() == $reserva->getIdReserva()) {
-                unset($reservas[$key]);
-                break;
-            }
+    // Eliminar la reserva del usuario
+    foreach ($reservas as $key => $value) {
+        if ($value->getIdReserva() == $reserva->getIdReserva()) {
+            unset($reservas[$key]);
+            break;
         }
-        $usu->setReserva(new ArrayCollection($reservas));
-        //sumamos a 1 los comensales de la reserva 
-        $reserva->setComensales($comensales + 1);
-        // Persistir el usuario editado
-        $entityManager->persist($usu);
-        $entityManager->persist($reserva);
-        $entityManager->flush();
+    }
+    $usu->setReserva(new ArrayCollection($reservas));
+    //sumamos a 1 los comensales de la reserva 
+    $reserva->setComensales($comensales + 1);
+    // Persistir el usuario editado
+    $entityManager->persist($usu);
+    $entityManager->persist($reserva);
+    $entityManager->flush();
 
-        // echo "La reserva se ha eliminado correctamente";
-        echo 1;
-        //si no existe agrega el usuario a la reserva
+    // echo "La reserva se ha eliminado correctamente";
+    echo 1;
+} else {
+    //if que controla que para apuntarse a la reserva tiene que haber mas de 0 comensales
+    if ($comensales - 1 < 0) {
+        echo 2;
     } else {
         // Asignar la reserva al usuario
         $reservas[] = $reserva;
@@ -77,8 +76,6 @@ if ($comensales - 1 < 0) {
         $entityManager->persist($usu);
         $entityManager->persist($reserva);
         $entityManager->flush();
-
-        // echo "La reserva se ha asignado correctamente";
         echo 0;
     }
 }

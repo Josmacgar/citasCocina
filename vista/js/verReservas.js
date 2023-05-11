@@ -69,7 +69,7 @@ function verReserva(comensales, precio, date, nombres, tipos, imagenes) {
   }
 }
 
-// se añade el boton click para que actualice la pagina al cerrar al modal porque se quedaban almacenados
+// se añade el boton click para que actualice la pagina al cerrar al modal porque se quedaban los platos almacenados
 let elementosCerrarModal = document.querySelectorAll('#cerrarModal, #cerrar');
 
 elementosCerrarModal.forEach(function(elemento) {

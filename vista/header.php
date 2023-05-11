@@ -74,7 +74,7 @@ session_start();
                                     echo "<li><a class=\"dropdown-item\" >$nombre</a></li>";
                                     echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/editarPerfil.php\">Perfil</a></li>";
                                     //if para mostrar mis reservas solo si es cliente
-                                    if ($_SESSION['rol']=='cliente') {
+                                    if ($_SESSION['rol']!='admin') {
                                         echo "<li><a class=\"dropdown-item\" href=\"/citascocina/vista/misReservas.php\">Mis reservas</a></li>";
                                     }
                                 }

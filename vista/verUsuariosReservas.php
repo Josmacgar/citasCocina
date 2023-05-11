@@ -5,7 +5,12 @@ include("header.php");
 use Doctrine\Common\Collections\ArrayCollection;
 // require_once dirname(__FILE__, 1) . "citasCocina/modelo/Doctrine/bootstrap.php";
 include("../modelo/Doctrine/bootstrap.php");
-include("../modelo/Doctrine/Entity/Mensajes.php");
+include("../modelo/Doctrine/Entity/Usuario.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+    $idReserva = $_GET['idReserva'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +45,12 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Dni</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">email</th>
                     <th scope="col">Fecha</th>
-                    <th scope="col">Comensales</th>
-                    <th scope="col">Precio</th>
+                    <th scope="col">Telefono</th>
 
                 </tr>
             </thead>
@@ -50,22 +58,24 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
             //contador que se va incrementando por cada fila 
             $contador = 1;
             //obtenemos el usuario
-            $usuario = $entityManager->getRepository("usuario")
-                ->findBy(array('idUsuario' => $_SESSION['idUsuario']));
-            //obtenemos las reservas del usuario
-            $reserva=$usuario[0]->getReserva();
+            $reservas = $entityManager->getRepository("usuario")
+                ->findByReserva($idReserva);
+
             //recorremos las reservas y las vamos mostrando
-            foreach ($reserva as $key) {
+            foreach ($reservas as $key) {
                 //formato de fecha
-                $fecha = $key->getFecha();
-                $fecha_str = $fecha->format('d/m/Y - H:i');
+                $fecha = $key['fecha_nac'];
+                $fecha_str = $fecha->format('d/m/Y');
             ?>
                 <tbody class="tbodyMensajes">
                     <tr data-bs-toggle="modal" data-bs-target="#verMensaje">
                         <th scope="row"><?php echo $contador ?></th>
-                        <td><?php echo $fecha_str?></td>
-                        <td id="cuerpo"><?php echo $key->getComensales() ?></td>
-                        <td><?php echo $key->getPrecio() ?> €</td>
+                        <td><?php echo $key['dni'] ?></td>
+                        <td><?php echo $key['nombre'] ?></td>
+                        <td><?php echo $key['apellidos'] ?></td>
+                        <td><?php echo $key['email'] ?></td>
+                        <td><?php echo $fecha_str ?></td>
+                        <td><?php echo $key['telefono'] ?></td>
 
                     </tr>
                 </tbody>
@@ -73,6 +83,11 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
                 $contador += 1;
             }
             ?>
+            <tfoot>
+                <tr>
+                    <td colspan="7" style="text-align: left;"> <b>Total:</b> <?php echo $contador - 1 ?></td>
+                </tr>
+            </tfoot>
         </table>
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->

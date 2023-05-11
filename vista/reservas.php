@@ -89,7 +89,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                         <?php
                         $prueba = findReservaUsuario($_SESSION['idUsuario'], $id, $entityManager);
                         //filtro para reservar que no sea profesor ni admin
-                        if (($_SESSION['rol'] != 'profesor' && $_SESSION['rol'] != 'admin')) {
+                        if (($_SESSION['rol'] != 'admin')) {
                             //cambiamos el color y el contenido dependiendo del valor que nos traiga $prueba
                             $bg_color = ($prueba == 1) ? 'green' : 'red';
                             echo "<a id=\"suscripcion\" class=\"btn btn-primary\" style=\"background-color: $bg_color;\" onclick=\"suscripcion('$id',this,$comensales)\">";
@@ -109,6 +109,7 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                             if ($_SESSION['rol'] == 'profesor' || $_SESSION['rol'] == 'admin') {
                                 echo " <a class=\"btn btn-warning\" href=\"/citascocina/vista/registroReservas.php?modo=editar&idReserva=$id\">Editar</a>";
                                 echo " <a data-id=\"$id\" class=\"eliminarReserva btn btn-danger\">Eliminar</a>";
+                                echo " <a href=\"/citascocina/vista/verUsuariosReservas.php?idReserva=$id\" class=\"btn btn-primary\"><i class=\"bi bi-person-check-fill\"></i></a>";
                             }
                         }
                         // print_r($idPlato);
