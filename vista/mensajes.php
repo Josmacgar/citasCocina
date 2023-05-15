@@ -39,42 +39,49 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
         <p id="botonAniadir">
             <button type="button" class="btn btn-secondary" id="imagenAniadir" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Redactar</button>
         </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">De:</th>
-                    <th scope="col">Asunto</th>
-                    <th scope="col">Cuerpo</th>
-                    <th scope="col">Fecha</th>
-                </tr>
-            </thead>
-            <?php
-            //contador que se va incrementando por cada fila 
-            $contador = 1;
-            $datos = $entityManager->getRepository("mensajes")
-                ->findBy(array('destinatario' => $_SESSION['idUsuario']));
-            foreach ($datos as $key) {
-                //formato de fecha
-                $fecha = $key->getFecha();
-                $fecha_str = $fecha->format('d/m/Y');
-            ?>
-                <tbody class="tbodyMensajes">
-                    <tr data-bs-toggle="modal" data-bs-target="#verMensaje" onclick="verMensaje('<?php echo $key->getUsuario()->getEmail() ?>','<?php echo $key->getAsunto() ?>','<?php echo $key->getCuerpo() ?>','<?php echo $fecha_str ?>')">
-                        <th scope="row"><?php echo $contador ?></th>
-                        <td><?php echo $key->getUsuario()->getEmail() ?></td>
-                        <td><?php echo $key->getAsunto() ?></td>
-                        <td id="cuerpo"><?php echo $key->getCuerpo() ?></td>
-                        <td><?php echo $fecha_str ?></td>
-
+        <?php
+        //contador que se va incrementando por cada fila 
+        $contador = 1;
+        $datos = $entityManager->getRepository("mensajes")
+            ->findBy(array('destinatario' => $_SESSION['idUsuario']));
+        if (count($datos) > 0) {
+        ?>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">De:</th>
+                        <th scope="col">Asunto</th>
+                        <th scope="col">Cuerpo</th>
+                        <th scope="col">Fecha</th>
                     </tr>
-                </tbody>
-            <?php
-                $contador += 1;
-            }
-            ?>
-        </table>
+                </thead>
+                <?php
+                foreach ($datos as $key) {
+                    //formato de fecha
+                    $fecha = $key->getFecha();
+                    $fecha_str = $fecha->format('d/m/Y');
+                ?>
+                    <tbody class="tbodyMensajes">
+                        <tr data-bs-toggle="modal" data-bs-target="#verMensaje" onclick="verMensaje('<?php echo $key->getUsuario()->getEmail() ?>','<?php echo $key->getAsunto() ?>','<?php echo $key->getCuerpo() ?>','<?php echo $fecha_str ?>')">
+                            <th scope="row"><?php echo $contador ?></th>
+                            <td><?php echo $key->getUsuario()->getEmail() ?></td>
+                            <td><?php echo $key->getAsunto() ?></td>
+                            <td id="cuerpo"><?php echo $key->getCuerpo() ?></td>
+                            <td><?php echo $fecha_str ?></td>
 
+                        </tr>
+                    </tbody>
+                <?php
+                    $contador += 1;
+                }
+                ?>
+            </table>
+        <?php
+        } else {
+            echo '<section class="m-auto d-flex justify-content-center"><p class="display-6">No existen Mensajes</p></section>';
+        }
+        ?>
         <!-- Modal ver mensaje-->
         <div class="modal fade" id="verMensaje" tabindex="-1" aria-labelledby="verMensaje" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -94,8 +101,8 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
                             </li>
                         </ul>
                         <div class="text-break">
-                        <strong>Contenido:</strong>
-                        <p id="contenido"></p>
+                            <strong>Contenido:</strong>
+                            <p id="contenido"></p>
                         </div>
 
                     </div>

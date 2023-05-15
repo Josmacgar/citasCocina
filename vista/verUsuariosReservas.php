@@ -41,6 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 <body>
     <div id="contenedor">
+        <?php
+        //obtenemos el usuario
+        $reservas = $entityManager->getRepository("usuario")
+            ->findByReserva($idReserva);
+            if (count($reservas) > 0) {
+        ?>
         <table class="table">
             <thead>
                 <tr>
@@ -57,9 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <?php
             //contador que se va incrementando por cada fila 
             $contador = 1;
-            //obtenemos el usuario
-            $reservas = $entityManager->getRepository("usuario")
-                ->findByReserva($idReserva);
 
             //recorremos las reservas y las vamos mostrando
             foreach ($reservas as $key) {
@@ -89,6 +92,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 </tr>
             </tfoot>
         </table>
+        <?php
+        } else {
+            echo '<section class="m-auto d-flex justify-content-center"><p class="display-6">No hay usuarios inscritos</p></section>';
+        }
+        ?>
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
         <script src="/citascocina/vista/js/scripts.js"></script>

@@ -65,10 +65,7 @@ $fecha_str = $fecha->format('d/m/Y');
                                             <h6>Fecha</h6>
                                             <p class="text-muted"><?php echo  $fecha_str; ?></p>
                                         </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Toral Reservas</h6>
-                                            <p class="text-muted">Total</p>
-                                        </div>
+
                                     </div>
 
                                     <div class="d-flex justify-content-start">

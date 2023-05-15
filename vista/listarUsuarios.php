@@ -87,14 +87,15 @@ include("../modelo/Doctrine/Entity/Usuario.php");
                         } else {
                             $segundoBaneo = 0;
                         }
+                        
                         ?>
                         <!-- En el select enviamos los datos mediante data hacia el ajax -->
                         <!-- tambien desabilitamos el select si el rol es admin -->
                         <select name="baneo" id="baneo" class="baneo-select form-select form-select-sm" aria-label=".form-select-sm example"
                         data-usu="<?php echo $key->getIdUsuario() ?>" 
                         <?php if($key->getRol()=='admin') echo 'disabled'?>>
-                            <option value="<?php echo $baneo ?>" selected><?php echo $baneo ?></option>
-                            <option value="<?php echo $segundoBaneo ?>"><?php echo $segundoBaneo ?></option>
+                            <option value="<?php echo $baneo ?>" selected><?php echo ($baneo == 1) ? "Baneado" : "Desbaneado";?></option>
+                            <option value="<?php echo $segundoBaneo ?>"><?php echo ($segundoBaneo == 1) ? "Baneado" : "Desbaneado"; ?></option>
                         </select>
                     </td>
                     <!-- ROL -->

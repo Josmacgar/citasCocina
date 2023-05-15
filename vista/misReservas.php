@@ -36,6 +36,14 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
 
 <body>
     <div id="contenedor">
+        <?php
+        //obtenemos el usuario
+        $usuario = $entityManager->getRepository("usuario")
+            ->findBy(array('idUsuario' => $_SESSION['idUsuario']));
+        //obtenemos las reservas del usuario
+        $reserva = $usuario[0]->getReserva();
+        if (count($reserva) > 0) {
+        ?>
         <table class="table">
             <thead>
                 <tr>
@@ -49,11 +57,6 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
             <?php
             //contador que se va incrementando por cada fila 
             $contador = 1;
-            //obtenemos el usuario
-            $usuario = $entityManager->getRepository("usuario")
-                ->findBy(array('idUsuario' => $_SESSION['idUsuario']));
-            //obtenemos las reservas del usuario
-            $reserva=$usuario[0]->getReserva();
             //recorremos las reservas y las vamos mostrando
             foreach ($reserva as $key) {
                 //formato de fecha
@@ -63,7 +66,7 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
                 <tbody class="tbodyMensajes">
                     <tr data-bs-toggle="modal" data-bs-target="#verMensaje">
                         <th scope="row"><?php echo $contador ?></th>
-                        <td><?php echo $fecha_str?></td>
+                        <td><?php echo $fecha_str ?></td>
                         <td id="cuerpo"><?php echo $key->getComensales() ?></td>
                         <td><?php echo $key->getPrecio() ?> €</td>
 
@@ -74,6 +77,11 @@ include("../modelo/Doctrine/Entity/Mensajes.php");
             }
             ?>
         </table>
+        <?php
+        } else {
+            echo '<section class="m-auto d-flex justify-content-center"><p class="display-6">No existen Reservas</p></section>';
+        }
+        ?>
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
         <script src="/citascocina/vista/js/scripts.js"></script>

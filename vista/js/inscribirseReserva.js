@@ -7,12 +7,12 @@ function suscripcion(reserva, elemento,comensales) {
     }).done(function(respuesta) {
       if (respuesta) {
         if (respuesta == 1) {
-          elemento.style.backgroundColor = 'green';
+          elemento.className = 'btn btn-success';
         } else if(respuesta==2) {
           alert('No quedan platos en la reserva');
         }else{
           alertify.success('Reservado');
-          elemento.style.backgroundColor = 'red';
+          elemento.className = 'btn btn-danger';
         }
 
         $('#contenedor').load(' #contenedor');

@@ -39,7 +39,6 @@ document.getElementById("enviar").addEventListener("click", function () {
     }).done(function (respuesta) {
       if (respuesta) {
         //enviamos el submit
-        alert('Correcto');
         window.location.href ="../vista/reservas.php";
       } else {
         alert('Fallido');
